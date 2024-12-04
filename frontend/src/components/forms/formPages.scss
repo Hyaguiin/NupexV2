@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Overpass:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+* {
+  font-family: "Overpass", sans-serif;
+  box-sizing: border-box; /* Para que o padding não afete as larguras */
+}
+
+.menu-projetos {
+  position: relative;
+  z-index: 1; /* Z-index menor para que o menu fique atrás */
+}
+
+.submit-project-form {
+  position: absolute; /* Para sobrepor o menu */
+  top: 57%;
+  left: 51%;
+  transform: translate(-50%, -50%); /* Centraliza o formulário */
+  background-color: #ffffff;
+  padding: 20px;
+  width: 100%;
+  height: 80%;
+  max-width: 87%; /* Ajuste conforme necessário */
+  z-index: 10; /* Z-index maior para que o formulário fique em cima */
+  border: solid 0.2px;
+}
+
+h2 {
+  color: #2e3a59;
+  margin-bottom: 20px;
+}
+
+h3 {
+  color: #2e3a59;
+  margin: 15px 0;
+}
+
+h4 {
+  color: #2e3a59;
+  margin: 10px 0; /* Ajusta o espaçamento dos subtítulos */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Estilo para campos de entrada */
+.input-field {
+  width: 100%; /* Faz os campos ocuparem 100% da largura do container */
+  padding: 15px; /* Padding interno para os campos */
+  border: 1px solid #e7e6e6; /* Borda do campo */
+  border-radius: 8px; /* Bordas arredondadas */
+  font-size: 16px; /* Tamanho da fonte */
+  color: #333; /* Cor do texto */
+  outline: none; /* Remove o contorno padrão do navegador */
+  transition: border-color 0.3s ease; /* Transição para mudança de cor */
+}
+
+.input-field:focus {
+  border-color: #007bff; /* Cor da borda ao focar */
+  background-color: #f1f8ff; /* Cor de fundo ao focar */
+}
+
+/* Estilo do botão */
+.btn-primary {
+  width: 100%; /* Botão ocupa 100% da largura */
+  padding: 10px; /* Estilo do padding para o botão */
+  background-color: #007bff; /* Cor de fundo do botão */
+  color: white; /* Cor do texto do botão */
+  border: none; /* Remove borda padrão */
+  border-radius: 8px; /* Bordas arredondadas */
+  cursor: pointer; /* Muda o cursor para pointer ao passar o mouse */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+}
+
+/* Flexbox para os containers */
+.container-row {
+  display: flex; /* Usar flexbox */
+  justify-content: space-between; /* Espaço entre os itens */
+  margin-bottom: 20px; /* Espaçamento abaixo dos containers */
+}
+
+.coordinator-collaborator-container {
+  display: flex; /* Usar flexbox para coordenador e colaborador */
+  flex-direction: column; /* Alinha os containers em coluna */
+  border: 1px solid #e7e6e6; /* Borda sutil */
+  border-radius: 4px; /* Bordas arredondadas */
+  padding: 10px; /* Padding interno */
+  background-color: #f9f9f9; /* Fundo levemente cinza */
+  width: 100%;
+  max-width: 100%;
+}
+
+.coordinator-container,
+.collaborator-container {
+  flex: 1; /* Cada container ocupa igual espaço */
+  margin-bottom: 15px; /* Espaçamento abaixo de cada seção */
+  padding: 10px; /* Padding interno */
+  background-color: #f9f9f9; /* Fundo branco para cada seção */
+  border-radius: 4px; /* Bordas arredondadas para as seções */
+  border: none;
+}
+
+.hidden {
+  display: none; /* Classe para ocultar o menu */
+}
+
+.projeto, .periodicidade, .modalidade{
+  display: flex;
+}
+
+.text-font{
+  font-size: large;
+  font-weight: bold;
+}
+
+#projectTitle{
+  width: 30%;
+}
+
+.botao{
+  border-radius: 8px;
+  background-color: #0056b3;
+  border: none;
+  height: 52px;
+  width: 170px;
+  float: right;
+  cursor: pointer;
+  margin-top: -10px;
+}
+
+.botao h4{
+  color: white;
+  text-align: center;
+  line-height: 10px;
+  font-size: medium;
+}
+
+@media (max-width: 768px) {
+  .submit-project-form {
+    width: 90%; /* Ajusta a largura do formulário em dispositivos móveis */
+    padding: 15px; /* Reduz o padding para melhor ajuste */
+    max-width: none; /* Remove max-width para melhor uso do espaço */
+    top: 20%; /* Ajusta a posição do formulário */
+  }
+
+  .container-row {
+    flex-direction: column; /* Coloca os itens em coluna */
+  }
+
+  .coordinator-container,
+  .collaborator-container {
+    width: 100%; /* Cada container ocupa 100% da largura */
+    margin-bottom: 15px; /* Espaçamento entre seções */
+  }
+
+  #projectTitle {
+    width: 100%; /* Campo ocupa 100% da largura */
+  }
+
+  .botao {
+    width: 100%; /* Botão ocupa 100% da largura em telas pequenas */
+    margin-top: 10px; /* Ajuste de margin para manter espaço */
+  }
+
+  .text-font {
+    font-size: medium; /* Ajuste de fonte para telas menores */
+  }
+}
