@@ -66,22 +66,99 @@ function FormularioPaginado() {
                 <div>
                     <h2>Parte 1</h2>
                     <div className="form-group">
-                        <label>
-                            Projeto:
-                            <input className="input-field" type="text" name="projeto" value={formData.projeto} onChange={handleChange} />
-                        </label>
+                        <label>Projeto:</label>
+                        <div>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="projeto"
+                                    value="Pesquisa"
+                                    checked={formData.projeto === 'Pesquisa'}
+                                    onChange={handleChange}
+                                />
+                                Pesquisa
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="projeto"
+                                    value="Extensão"
+                                    checked={formData.projeto === 'Extensão'}
+                                    onChange={handleChange}
+                                />
+                                Extensão
+                            </label>
+                        </div>
                     </div>
                     <div className="form-group">
-                        <label>
-                            Periodicidade:
-                            <input className="input-field" type="text" name="periodicidade" value={formData.periodicidade} onChange={handleChange} />
-                        </label>
+                        <label>Periodicidade:</label>
+                        <div>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="periodicidade"
+                                    value="Semestral"
+                                    checked={formData.periodicidade === 'Semestral'}
+                                    onChange={handleChange}
+                                />
+                                Semestral
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="periodicidade"
+                                    value="Anual"
+                                    checked={formData.periodicidade === 'Anual'}
+                                    onChange={handleChange}
+                                />
+                                Anual
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="periodicidade"
+                                    value="Bienal"
+                                    checked={formData.periodicidade === 'Bienal'}
+                                    onChange={handleChange}
+                                />
+                                Bienal
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="periodicidade"
+                                    value="Trienal"
+                                    checked={formData.periodicidade === 'Trienal'}
+                                    onChange={handleChange}
+                                />
+                                Trienal
+                            </label>
+                        </div>
                     </div>
                     <div className="form-group">
-                        <label>
-                            Modalidade:
-                            <input className="input-field" type="text" name="modalidade" value={formData.modalidade} onChange={handleChange} />
-                        </label>
+                        <label>Modalidade:</label>
+                        <div>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="modalidade"
+                                    value="Profice"
+                                    checked={formData.modalidade === 'Profice'}
+                                    onChange={handleChange}
+                                />
+                                Profice
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="modalidade"
+                                    value="Provic"
+                                    checked={formData.modalidade === 'Provic'}
+                                    onChange={handleChange}
+                                />
+                                Provic
+                            </label>
+                        </div>
                     </div>
                     <div className="form-group">
                         <label>
@@ -89,53 +166,61 @@ function FormularioPaginado() {
                             <input className="input-field" type="text" name="titulo" value={formData.titulo} onChange={handleChange} />
                         </label>
                     </div>
-                    <div className="form-group">
-                        <label>
-                            Professor Coordenador:
-                            <input className="input-field" type="text" name="professor_coordenador" value={formData.professores.professor_coordenador} onChange={handleChangeProfessores} />
-                        </label>
+                    <div className="form-row">
+                        <div className="form-column">
+                            <label>
+                                Professor Coordenador:
+                                <input className="input-field" type="text" name="professor_coordenador" value={formData.professores.professor_coordenador} onChange={handleChangeProfessores} />
+                            </label>
+                        </div>
+                        <div className="form-column">
+                            <label>
+                                Email Coordenador:
+                                <input className="input-field" type="email" name="email_coordenador" value={formData.professores.email_coordenador} onChange={handleChangeProfessores} />
+                            </label>
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label>
-                            Email Coordenador:
-                            <input className="input-field" type="email" name="email_coordenador" value={formData.professores.email_coordenador} onChange={handleChangeProfessores} />
-                        </label>
+                    <div className="form-row">
+                        <div className="form-column">
+                            <label>
+                                Professor Colaborador:
+                                <input className="input-field" type="text" name="professor_colaborador" value={formData.professores.professor_colaborador} onChange={handleChangeProfessores} />
+                            </label>
+                        </div>
+                        <div className="form-column">
+                            <label>
+                                Email Colaborador:
+                                <input className="input-field" type="email" name="email_colaborador" value={formData.professores.email_colaborador} onChange={handleChangeProfessores} />
+                            </label>
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label>
-                            Professor Colaborador:
-                            <input className="input-field" type="text" name="professor_colaborador" value={formData.professores.professor_colaborador} onChange={handleChangeProfessores} />
-                        </label>
+                    <div className="form-row">
+                        <div className="form-column">
+                            <label>
+                                Curso Coordenador:
+                                <input className="input-field" type="text" name="curso_coordenador" value={formData.professores.curso_coordenador} onChange={handleChangeProfessores} />
+                            </label>
+                        </div>
+                        <div className="form-column">
+                            <label>
+                                Curso Colaborador:
+                                <input className="input-field" type="text" name="curso_colaborador" value={formData.professores.curso_colaborador} onChange={handleChangeProfessores} />
+                            </label>
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label>
-                            Email Colaborador:
-                            <input className="input-field" type="email" name="email_colaborador" value={formData.professores.email_colaborador} onChange={handleChangeProfessores} />
-                        </label>
-                    </div>
-                    <div className="form-group">
-                        <label>
-                            Curso Coordenador:
-                            <input className="input-field" type="text" name="curso_coordenador" value={formData.professores.curso_coordenador} onChange={handleChangeProfessores} />
-                        </label>
-                    </div>
-                    <div className="form-group">
-                        <label>
-                            Curso Colaborador:
-                            <input className="input-field" type="text" name="curso_colaborador" value={formData.professores.curso_colaborador} onChange={handleChangeProfessores} />
-                        </label>
-                    </div>
-                    <div className="form-group">
-                        <label>
-                            Telefone Coordenador:
-                            <input className="input-field" type="text" name="telefone_coordenador" value={formData.professores.telefone_coordenador} onChange={handleChangeProfessores} />
-                        </label>
-                    </div>
-                    <div className="form-group">
-                        <label>
-                            Telefone Colaborador:
-                            <input className="input-field" type="text" name="telefone_colaborador" value={formData.professores.telefone_colaborador} onChange={handleChangeProfessores} />
-                        </label>
+                    <div className="form-row">
+                        <div className="form-column">
+                            <label>
+                                Telefone Coordenador:
+                                <input className="input-field" type="text" name="telefone_coordenador" value={formData.professores.telefone_coordenador} onChange={handleChangeProfessores} />
+                            </label>
+                        </div>
+                        <div className="form-column">
+                            <label>
+                                Telefone Colaborador:
+                                <input className="input-field" type="text" name="telefone_colaborador" value={formData.professores.telefone_colaborador} onChange={handleChangeProfessores} />
+                            </label>
+                        </div>
                     </div>
                     <button type="button" onClick={handleNext} className="btn-primary">Próximo</button>
                 </div>

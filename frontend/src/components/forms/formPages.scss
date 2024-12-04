@@ -44,7 +44,7 @@ h4 {
 }
 
 /* Estilo para campos de entrada */
-.input-field {
+.input-field, .select-field {
   width: 100%; /* Faz os campos ocuparem 100% da largura do container */
   padding: 15px; /* Padding interno para os campos */
   border: 1px solid #e7e6e6; /* Borda do campo */
@@ -55,7 +55,7 @@ h4 {
   transition: border-color 0.3s ease; /* Transição para mudança de cor */
 }
 
-.input-field:focus {
+.input-field:focus, .select-field:focus {
   border-color: #007bff; /* Cor da borda ao focar */
   background-color: #f1f8ff; /* Cor de fundo ao focar */
 }
@@ -93,34 +93,39 @@ h4 {
   max-width: 100%;
 }
 
-.coordinator-container,
-.collaborator-container {
-  flex: 1; /* Cada container ocupa igual espaço */
-  margin-bottom: 15px; /* Espaçamento abaixo de cada seção */
-  padding: 10px; /* Padding interno */
-  background-color: #f9f9f9; /* Fundo branco para cada seção */
-  border-radius: 4px; /* Bordas arredondadas para as seções */
-  border: none;
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.form-column {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.form-column:last-child {
+  margin-right: 0;
 }
 
 .hidden {
   display: none; /* Classe para ocultar o menu */
 }
 
-.projeto, .periodicidade, .modalidade{
+.projeto, .periodicidade, .modalidade {
   display: flex;
 }
 
-.text-font{
+.text-font {
   font-size: large;
   font-weight: bold;
 }
 
-#projectTitle{
+#projectTitle {
   width: 30%;
 }
 
-.botao{
+.botao {
   border-radius: 8px;
   background-color: #0056b3;
   border: none;
@@ -131,7 +136,7 @@ h4 {
   margin-top: -10px;
 }
 
-.botao h4{
+.botao h4 {
   color: white;
   text-align: center;
   line-height: 10px;
@@ -148,6 +153,15 @@ h4 {
 
   .container-row {
     flex-direction: column; /* Coloca os itens em coluna */
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-column {
+    margin-right: 0;
+    margin-bottom: 15px;
   }
 
   .coordinator-container,
