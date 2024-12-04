@@ -166,6 +166,7 @@ function FormularioPaginado() {
                             <input className="input-field" type="text" name="titulo" value={formData.titulo} onChange={handleChange} />
                         </label>
                     </div>
+                   
                     <div className="form-row">
                         <div className="form-column">
                             <label>
@@ -222,6 +223,8 @@ function FormularioPaginado() {
                             </label>
                         </div>
                     </div>
+                    
+
                     <button type="button" onClick={handleNext} className="btn-primary">Próximo</button>
                 </div>
             )}
