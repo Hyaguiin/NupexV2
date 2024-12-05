@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import './formPages.scss'; // Supondo que você tenha um arquivo de estilo específico para este componente
+//import '../../constants/base_url'
+
+
+// eslint-disable-next-line react-refresh/only-export-components
+//const URL = `${BASE_URL}/projeto_nupex`;
 
 function FormularioPaginado() {
     const [page, setPage] = useState(1);
@@ -56,8 +61,40 @@ function FormularioPaginado() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('Form Data:', formData);
-        // Aqui você pode adicionar a lógica para enviar os dados do formulário para um servidor ou API
+
+        // Aqui, você prepara os dados para enviar ao backend
+        const formDataToSend = {
+            projeto: formData.projeto,
+            periodicidade: formData.periodicidade,
+            modalidade: formData.modalidade,
+            titulo: formData.titulo,
+            professores: formData.professores,
+            resumo: formData.resumo,
+            palavra_chave: formData.palavra_chave,
+            justificativa: formData.justificativa,
+            objetivos: formData.objetivos,
+            fundamentacao_teorica: formData.fundamentacao_teorica,
+            metodologia: formData.metodologia,
+            referencias: formData.referencias,
+        };
+
+        // Enviar os dados para o servidor
+        fetch('http://localhost:3001/projeto_nupex', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formDataToSend),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Sucesso:', data);
+            // Você pode redirecionar ou exibir uma mensagem de sucesso aqui
+        })
+        .catch((error) => {
+            console.error('Erro:', error);
+            // Você pode exibir uma mensagem de erro aqui
+        });
     };
 
     return (
@@ -166,7 +203,7 @@ function FormularioPaginado() {
                             <input className="input-field" type="text" name="titulo" value={formData.titulo} onChange={handleChange} />
                         </label>
                     </div>
-                   
+
                     <div className="form-row">
                         <div className="form-column">
                             <label>
@@ -223,7 +260,6 @@ function FormularioPaginado() {
                             </label>
                         </div>
                     </div>
-                    
 
                     <button type="button" onClick={handleNext} className="btn-primary">Próximo</button>
                 </div>

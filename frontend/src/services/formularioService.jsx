@@ -1,10 +1,10 @@
 import axios from 'axios';
 import BASE_URL from '../constants/base_url';
 
-// eslint-disable-next-line react-refresh/only-export-components
-const URL = `${BASE_URL}/projetos`;
 
-// Função para obter todos os projetos
+const URL = `${BASE_URL}/projeto_nupex`;
+
+
 async function getAllProjetos() {
   try {
     const token = localStorage.getItem('token');
