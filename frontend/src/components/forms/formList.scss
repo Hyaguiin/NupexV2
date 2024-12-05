@@ -1,0 +1,90 @@
+/* formList.scss */
+
+/* Ajusta o contêiner principal para um tamanho ainda mais amplo */
+.projetos-list {
+    max-width: 1500px; /* Aumentando ainda mais a largura */
+    margin: 20px auto; /* Centraliza o conteúdo */
+    padding: 10px;
+}
+  
+/* Cabeçalho da lista de projetos */
+.projetos-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f1f1f1;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+  
+.header-item {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+    width: 22%; /* Aumentando ainda mais a largura das colunas do cabeçalho */
+    text-align: center;
+}
+  
+.projeto-item {
+    background-color: #ffffff;
+    padding: 12px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.projeto-detail {
+    width: 22%; /* Aumentando a largura das colunas dos itens */
+}
+  
+.projeto-detail strong {
+    font-weight: bold;
+    color: #007bff;
+}
+  
+.projeto-detail span {
+    margin-left: 5px;
+    color: #555;
+}
+  
+.projeto-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+  
+.action-btn {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+  
+.action-btn:hover {
+    background-color: #0056b3;
+}
+  
+.loading, .error, .no-projects {
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+}
+  
+/* Estilo para o carregamento, erro e nenhum projeto encontrado */
+.loading {
+    color: #007bff;
+}
+  
+.error {
+    color: red;
+}
+  
+.no-projects {
+    color: grey;
+}

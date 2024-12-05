@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './formPages.scss'; // Supondo que você tenha um arquivo de estilo específico para este componente
-//import '../../constants/base_url'
-
+import './formPages.scss'; 
+import { ToastContainer, toast } from 'react-toastify';  // Importando o ToastContainer e toast
+import 'react-toastify/dist/ReactToastify.css';  // Importando os estilos do Toastify
 
 // eslint-disable-next-line react-refresh/only-export-components
 //const URL = `${BASE_URL}/projeto_nupex`;
@@ -62,7 +62,6 @@ function FormularioPaginado() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        // Aqui, você prepara os dados para enviar ao backend
         const formDataToSend = {
             projeto: formData.projeto,
             periodicidade: formData.periodicidade,
@@ -78,7 +77,6 @@ function FormularioPaginado() {
             referencias: formData.referencias,
         };
 
-        // Enviar os dados para o servidor
         fetch('http://localhost:3001/projeto_nupex', {
             method: 'POST',
             headers: {
@@ -89,11 +87,17 @@ function FormularioPaginado() {
         .then((response) => response.json())
         .then((data) => {
             console.log('Sucesso:', data);
-            // Você pode redirecionar ou exibir uma mensagem de sucesso aqui
+            // Exibir mensagem de sucesso com o Toastify
+            toast.success('Projeto enviado com sucesso!');
+            // Realizar o refresh da página após o envio
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000); // O refresh acontece após 2 segundos, para o usuário ver a mensagem
         })
         .catch((error) => {
             console.error('Erro:', error);
-            // Você pode exibir uma mensagem de erro aqui
+            // Exibir mensagem de erro com o Toastify
+            toast.error('Erro ao enviar o projeto. Tente novamente.');
         });
     };
 
@@ -330,6 +334,7 @@ function FormularioPaginado() {
                     <button type="submit" className="btn-primary">Enviar</button>
                 </div>
             )}
+              <ToastContainer />
         </form>
     );
 }

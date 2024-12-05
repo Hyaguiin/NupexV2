@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './home.scss'; // Supondo que você tenha um arquivo de estilo específico para esse componente
 import FormularioPaginado from '../../components/forms/formPages';
+import ListaProjetos from '../../components/forms/formList';
 
 function Home() {
   // Estado para controlar a exibição do formulário
@@ -43,23 +44,16 @@ function Home() {
         </button>
       </div>
 
-      {/* Mostra o formulário se showForm for verdadeiro */}
+      
       {showForm && (
         <section>
           <FormularioPaginado />
         </section>
       )}
 
+      
       <section>
-        <div className="menu-projetos">
-          <div className="menu-projetos-describe">
-            <h4 className="content-describe">Nome</h4>
-            <h4 className="content-describe">Descrição</h4>
-            <h4 className="content-describe">Curso</h4>
-            <h4 className="content-describe">Status</h4>
-            <h4 className="content-describe">Ações</h4>
-          </div>
-        </div>
+        <ListaProjetos />
       </section>
 
       <div className="painel">
