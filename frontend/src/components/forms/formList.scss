@@ -5,8 +5,10 @@
     max-width: 1500px; /* Aumentando ainda mais a largura */
     margin: 20px auto; /* Centraliza o conteúdo */
     padding: 10px;
+    max-height: 600px; /* Define uma altura máxima para o scroll */
+    overflow-y: auto; /* Permite rolar verticalmente se o conteúdo for maior que o limite */
 }
-  
+
 /* Cabeçalho da lista de projetos */
 .projetos-header {
     display: flex;
@@ -15,7 +17,7 @@
     padding: 10px;
     margin-bottom: 15px;
 }
-  
+
 .header-item {
     font-weight: bold;
     font-size: 16px;
@@ -85,6 +87,7 @@
     color: #555;
 }
 
+/* Botões de ação dentro de cada item de projeto */
 .projeto-actions {
     display: flex;
     justify-content: space-between;
@@ -106,36 +109,98 @@
     background-color: #0056b3;
 }
 
+/* Estilo para o carregamento, erro e nenhum projeto encontrado */
 .loading, .error, .no-projects {
     text-align: center;
     font-size: 16px;
     color: #555;
 }
 
-/* Estilo para o carregamento, erro e nenhum projeto encontrado */
+/* Estilo de carregamento */
 .loading {
     color: #007bff;
 }
 
+/* Estilo de erro */
 .error {
     color: red;
 }
 
+/* Estilo para quando não houver projetos */
 .no-projects {
     color: grey;
 }
+
+/* Estilo para quebra de linha no conteúdo de projetos */
 .projeto-detail {
     word-wrap: break-word; /* Faz a quebra de linha quando o texto é muito longo */
     overflow-wrap: break-word; /* Propriedade equivalente, por compatibilidade */
     white-space: normal; /* Permite a quebra de linha dentro do texto */
-  }
+}
 
-  .projeto-detail span {
+/* Adicionando o efeito de ellipsis nos textos longos */
+.projeto-detail span {
     display: inline-block;
     width: 200px; /* Defina a largura máxima */
     white-space: nowrap; /* Impede quebra de linha */
     overflow: hidden; /* Oculta o texto que ultrapassa o limite */
     text-overflow: ellipsis; /* Adiciona '...' no final do texto */
-  }
-  
-  
+}
+
+/* Estilo para a escala de duração */
+.escala-duracao {
+    margin-top: 15px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.escala-duracao input[type="range"] {
+    width: 100%;
+    margin: 10px 0;
+}
+
+/* Estilo para o modal (visualização do projeto) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 1000px;
+    position: relative;
+}
+
+.modal-body {
+    margin-top: 15px;
+}
+
+/* Estilo do botão de fechar */
+.modal-content button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.modal-content button:hover {
+    background-color: #cc0000;
+}

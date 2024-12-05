@@ -17,7 +17,7 @@
   transform: translate(-50%, -50%); /* Centraliza o formulário */
   background-color: #ffffff;
   padding: 20px;
-  width: 100%;
+  width: 83%;
   height: 80%;
   max-width: 87%; /* Ajuste conforme necessário */
   z-index: 10; /* Z-index maior para que o formulário fique em cima */
@@ -62,13 +62,14 @@ h4 {
 
 /* Estilo do botão */
 .btn-primary {
-  width: 100%; /* Botão ocupa 100% da largura */
-  padding: 10px; /* Estilo do padding para o botão */
+  padding: 8px 20px; /* Ajuste do tamanho do padding */
   background-color: #007bff; /* Cor de fundo do botão */
   color: white; /* Cor do texto do botão */
   border: none; /* Remove borda padrão */
   border-radius: 8px; /* Bordas arredondadas */
   cursor: pointer; /* Muda o cursor para pointer ao passar o mouse */
+  font-size: 14px; /* Tamanho da fonte reduzido */
+  margin-right: 10px; /* Espaço entre os botões */
 }
 
 .btn-primary:hover {
@@ -183,7 +184,28 @@ h4 {
     font-size: medium; /* Ajuste de fonte para telas menores */
   }
 }
-.ProfessorProponente{
-    display: flex;
-    background-color: #a29f9f;
+
+/* Estilo para os botões de navegação (Próximo e Anterior) */
+/* Estilo para os botões de navegação (Próximo e Anterior) */
+.button-container {
+  display: flex; /* Flexbox para alinhamento horizontal */
+  justify-content: center; /* Centraliza os botões horizontalmente */
+  gap: 10px; /* Espaçamento entre os botões */
+  margin-top: 20px; /* Espaçamento superior para os botões */
 }
+
+.button-container .btn-primary {
+  padding: 8px 15px; /* Botões menores */
+  font-size: 14px; /* Tamanho de fonte menor */
+  width: 120px; /* Definindo uma largura fixa para os botões */
+  flex: 0 0 auto; /* Não permite que os botões cresçam ou encolham */
+  border-radius: 8px; /* Bordas arredondadas */
+}
+
+/* Opcional: Mudar cor de fundo ao passar o mouse */
+.button-container .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+
+

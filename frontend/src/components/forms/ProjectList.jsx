@@ -1,20 +1,11 @@
-import React, { useState } from "react";
-import { deleteProjeto } from '../../services/formularioService'; // Adapte o serviço de acordo com sua estrutura
+import React from "react";
 import './ProjectList.scss';
 
-const ProjectList = ({ projeto }) => {  // Aqui você recebe o projeto específico
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+const ProjectList = ({ projeto, onClose }) => {  // Recebe o onClose como prop
 
-  const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("Tem certeza de que deseja remover este projeto?");
-    if (confirmDelete) {
-      try {
-        await deleteProjeto(id);
-        // A lógica de remoção pode ser feita aqui ou no componente pai
-      } catch (error) {
-        setError("Erro ao deletar o projeto.");
-      }
+  const handleClose = () => {
+    if (onClose) {
+      onClose();  // Chama a função onClose para fechar o pop-up
     }
   };
 
@@ -47,8 +38,9 @@ const ProjectList = ({ projeto }) => {  // Aqui você recebe o projeto específi
         <li><strong>Referências:</strong> {projeto.referencias}</li>
       </ul>
 
-      <button className="delete-btn" onClick={() => handleDelete(projeto.id)}>
-        Remover
+      {/* Botão de Fechar */}
+      <button className="close-btn" onClick={handleClose}>
+        Fechar
       </button>
     </div>
   );

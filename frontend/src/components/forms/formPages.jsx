@@ -104,7 +104,7 @@ function FormularioPaginado() {
     return (
         <form onSubmit={handleSubmit} className="submit-project-form">
             {page === 1 && (
-                <div>
+                <div className="form-section">
                     <h2>Parte 1</h2>
                     <div className="form-group">
                         <label>Projeto:</label>
@@ -207,7 +207,7 @@ function FormularioPaginado() {
                             <input className="input-field" type="text" name="titulo" value={formData.titulo} onChange={handleChange} />
                         </label>
                     </div>
-
+    
                     <div className="form-row">
                         <div className="form-column">
                             <label>
@@ -264,13 +264,14 @@ function FormularioPaginado() {
                             </label>
                         </div>
                     </div>
-
+                    <div className="button-container">
                     <button type="button" onClick={handleNext} className="btn-primary">Próximo</button>
+                    </div>
                 </div>
             )}
-
+    
             {page === 2 && (
-                <div>
+                <div className="form-section">
                     <h2>Parte 2</h2>
                     <div className="form-group">
                         <label>
@@ -290,13 +291,15 @@ function FormularioPaginado() {
                             <textarea className="input-field" name="justificativa" value={formData.justificativa} onChange={handleChange} />
                         </label>
                     </div>
+                    <div className="button-container">
                     <button type="button" onClick={handlePrevious} className="btn-primary">Anterior</button>
                     <button type="button" onClick={handleNext} className="btn-primary">Próximo</button>
+                    </div>
                 </div>
             )}
-
+    
             {page === 3 && (
-                <div>
+                <div className="form-section">
                     <h2>Parte 3</h2>
                     <div className="form-group">
                         <label>
@@ -310,13 +313,15 @@ function FormularioPaginado() {
                             <textarea className="input-field" name="fundamentacao_teorica" value={formData.fundamentacao_teorica} onChange={handleChange} />
                         </label>
                     </div>
+                    <div className="button-container">
                     <button type="button" onClick={handlePrevious} className="btn-primary">Anterior</button>
                     <button type="button" onClick={handleNext} className="btn-primary">Próximo</button>
+                    </div>
                 </div>
             )}
-
+    
             {page === 4 && (
-                <div>
+                <div className="form-section">
                     <h2>Parte 4</h2>
                     <div className="form-group">
                         <label>
@@ -330,13 +335,17 @@ function FormularioPaginado() {
                             <textarea className="input-field" name="referencias" value={formData.referencias} onChange={handleChange} />
                         </label>
                     </div>
-                    <button type="button" onClick={handlePrevious} className="btn-primary">Anterior</button>
-                    <button type="submit" className="btn-primary">Enviar</button>
+                    <div className="button-container">
+                            <button type="button" onClick={handlePrevious} className="btn-primary">Voltar</button>
+                            <button type="submit" className="btn-primary">Enviar</button>
+                    </div>
+
                 </div>
             )}
-              <ToastContainer />
+            <ToastContainer />
         </form>
     );
+    
 }
 
 export default FormularioPaginado;
