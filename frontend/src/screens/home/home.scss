@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Overpass:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
-
-
 html, body {
     height: 100%;
     overflow: hidden !important; /* Forçar a remoção da rolagem */
+    margin: 0;
+    padding: 0;
 }
 
 .ubuntu-bold {
@@ -57,7 +57,7 @@ html, body {
 }
 
 .aces {
-    margin-left: auto; 
+    margin-left: auto;
     margin-top: 5px;
 }
 
@@ -68,6 +68,7 @@ html, body {
     font-size: 20px;
     text-transform: uppercase;
 }
+
 .text-logo{
     margin-top: 20px;
 }
@@ -128,7 +129,7 @@ h2 {
     margin-top: 30px;
     gap: 0px;
     opacity: 0.5;
-    max-height: 100vh; 
+    max-height: 100vh;
     overflow: hidden;
 }
 
@@ -145,3 +146,109 @@ h2 {
     margin-right: 300px;
 }
 
+/* Media Queries para Responsividade */
+
+@media screen and (max-width: 1200px) {
+    .container-name {
+        margin-right: 200px; /* Reduz a margem em telas menores */
+    }
+
+    .menu-projetos {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    .menu-projetos-describe {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .Submeter-Projeto {
+        margin-left: 50px;
+    }
+
+    .Projeitos {
+        font-size: 24px;
+        margin-left: 120px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .container-name {
+        margin-right: 100px;
+    }
+
+    .menu-projetos {
+        width: 100%;
+        margin-left: 0;
+        height: auto;
+        padding: 10px;
+    }
+
+    .Projeitos {
+        font-size: 22px;
+        margin-left: 100px;
+    }
+
+    .Submeter-Projeto {
+        margin-left: 20px;
+        margin-top: 10px;
+    }
+
+    .content-describe {
+        margin-right: 100px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container-name {
+        margin-right: 50px;
+    }
+
+    .Projeitos {
+        font-size: 18px;
+        margin-left: 50px;
+    }
+
+    .Submeter-Projeto {
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    .menu-projetos {
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .menu-projetos-describe {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .Projeitos {
+        font-size: 16px;
+        margin-left: 20px;
+    }
+
+    .Submeter-Projeto {
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    .menu-projetos {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .menu-projetos-describe {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+}

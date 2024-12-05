@@ -66,11 +66,11 @@
 
 /* Ajustando as divisórias para cada posição entre as colunas */
 .projeto-item::before {
-    left: 20%; /* Ajuste de acordo com a largura das colunas */
+    left: 15%; /* Ajuste de acordo com a largura das colunas */
 }
 
 .projeto-item::after {
-    left: 58%; /* Ajuste para a segunda divisão */
+    left: 70%; /* Ajuste para a segunda divisão */
 }
 
 /* Para os outros campos, você pode adicionar mais divisórias verticais se necessário */
@@ -124,3 +124,18 @@
 .no-projects {
     color: grey;
 }
+.projeto-detail {
+    word-wrap: break-word; /* Faz a quebra de linha quando o texto é muito longo */
+    overflow-wrap: break-word; /* Propriedade equivalente, por compatibilidade */
+    white-space: normal; /* Permite a quebra de linha dentro do texto */
+  }
+
+  .projeto-detail span {
+    display: inline-block;
+    width: 200px; /* Defina a largura máxima */
+    white-space: nowrap; /* Impede quebra de linha */
+    overflow: hidden; /* Oculta o texto que ultrapassa o limite */
+    text-overflow: ellipsis; /* Adiciona '...' no final do texto */
+  }
+  
+  

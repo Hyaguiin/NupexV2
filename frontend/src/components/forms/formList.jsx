@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAllProjetos, deleteProjeto, updateProjeto } from '../../services/formularioService';
 import './formList.scss';
+import ProjectList from './ProjectList'; // Importe o componente ProjectList
 
 function ListaProjetos() {
   const [projetos, setProjetos] = useState([]);
@@ -8,8 +9,20 @@ function ListaProjetos() {
   const [error, setError] = useState(null);
   const [editandoProjeto, setEditandoProjeto] = useState(null);
   const [projetoEditado, setProjetoEditado] = useState({});
-  const [showEscalaDuracao, setShowEscalaDuracao] = useState(false); // Estado para controle da exibição da escala de duração
+  const [projetosComEscalaVisible, setProjetosComEscalaVisible] = useState({});
+  const [duracaoProjeto, setDuracaoProjeto] = useState({});
+  const [showProjectList, setShowProjectList] = useState(false); // Controle para mostrar o ProjectList
+  const [selectedProjeto, setSelectedProjeto] = useState(null); // Para armazenar o projeto selecionado
 
+  // Função para truncar o resumo
+  const truncateText = (text, maxLength) => {
+    if (text && text.length > maxLength) {
+      return text.slice(0, maxLength) + '...'; // Corta e adiciona '...'
+    }
+    return text; // Retorna o texto sem alterações se não ultrapassar o limite
+  };
+
+  // Carregar os projetos
   useEffect(() => {
     const fetchProjetos = async () => {
       try {
@@ -28,6 +41,7 @@ function ListaProjetos() {
     fetchProjetos();
   }, []);
 
+  // Editar projeto
   const handleEdit = (projeto) => {
     setEditandoProjeto(projeto);
     setProjetoEditado(projeto);
@@ -47,6 +61,7 @@ function ListaProjetos() {
     }
   };
 
+  // Deletar projeto
   const handleDelete = async (id) => {
     try {
       await deleteProjeto(id);
@@ -58,9 +73,32 @@ function ListaProjetos() {
     }
   };
 
-  const handleEscalaDuracao = (projeto) => {
-    // Função que abre ou fecha a exibição da escala de duração para o projeto
-    setShowEscalaDuracao(!showEscalaDuracao);
+  // Controlar visibilidade da escala de duração
+  const toggleEscalaDuracao = (projetoId) => {
+    setProjetosComEscalaVisible(prevState => ({
+      ...prevState,
+      [projetoId]: !prevState[projetoId]
+    }));
+  };
+
+  // Atualizar o valor da duração
+  const handleDuracaoChange = (projetoId, valor) => {
+    setDuracaoProjeto(prevState => ({
+      ...prevState,
+      [projetoId]: valor
+    }));
+  };
+
+  // Mostrar ou ocultar o ProjectList no modal
+  const handleVisualizar = (projeto) => {
+    setSelectedProjeto(projeto);
+    setShowProjectList(true);
+  };
+
+  // Fechar o modal de visualização
+  const handleCloseModal = () => {
+    setShowProjectList(false);
+    setSelectedProjeto(null);
   };
 
   if (loading) {
@@ -131,7 +169,7 @@ function ListaProjetos() {
             <strong>Projeto:</strong> <span>{projeto.projeto || 'Sem nome'}</span>
           </div>
           <div className="projeto-detail">
-            <strong>Resumo:</strong> <span>{projeto.resumo || 'Sem resumo'}</span>
+            <strong>Resumo:</strong> <span>{truncateText(projeto.resumo || 'Sem resumo', 100)}</span>
           </div>
           <div className="projeto-detail">
             <strong>Curso Coordenador:</strong> <span>{projeto.curso_coordenador || 'Sem curso coordenador'}</span>
@@ -142,10 +180,40 @@ function ListaProjetos() {
           <div className="projeto-actions">
             <button className="action-btn" onClick={() => handleEdit(projeto)}>Editar</button>
             <button className="action-btn" onClick={() => handleDelete(projeto.id)}>Excluir</button>
-            <button className="action-btn" onClick={() => handleEscalaDuracao(projeto)}>Escala de Duração</button> {/* Novo botão */}
+            <button className="action-btn" onClick={() => toggleEscalaDuracao(projeto.id)}>Escala de Duração</button>
+            <button className="action-btn" onClick={() => handleVisualizar(projeto)}>Visualizar</button> {/* Botão Visualizar */}
           </div>
+
+          {/* Exibição da Escala de Duração */}
+          {projetosComEscalaVisible[projeto.id] && (
+            <div className="escala-duracao">
+              <h5>Escala de Duração</h5>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                value={duracaoProjeto[projeto.id] || 50}
+                onChange={(e) => handleDuracaoChange(projeto.id, e.target.value)}
+              />
+              <div>{duracaoProjeto[projeto.id]}% Concluído</div>
+            </div>
+          )}
         </div>
       ))}
+
+      {/* Exibindo o ProjectList quando showProjectList for verdadeiro */}
+      {showProjectList && selectedProjeto && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Detalhes do Projeto</h2>
+            <button onClick={handleCloseModal}>Fechar</button>
+            <div className="modal-body">
+              <ProjectList projeto={selectedProjeto} /> {/* Passando o projeto selecionado */}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

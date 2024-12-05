@@ -120,3 +120,109 @@
     margin-left: 15px;
     margin-top: -100px;
 }
+
+/* Media Queries para Responsividade */
+
+@media screen and (max-width: 1200px) {
+    .painel {
+        width: 10%; /* Ajusta o tamanho do painel em telas menores */
+    }
+
+    .painel:hover {
+        width: 20%; /* Expande um pouco mais ao passar o mouse */
+    }
+
+    .painel-content {
+        margin-left: 20%;
+    }
+
+    .perfil, .dashboard-icon, .user-icon {
+        margin-left: 15px; /* Ajuste das margens */
+    }
+
+    .dashboard-name {
+        margin-left: 50px; /* Ajusta o espaço do nome do painel */
+    }
+
+    .nome {
+        margin-left: 20px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .painel {
+        width: 12%; /* Menor ainda em telas de tablet */
+    }
+
+    .painel:hover {
+        width: 22%;
+    }
+
+    .painel-content {
+        margin-left: 22%;
+    }
+
+    .perfil, .dashboard-icon, .user-icon {
+        margin-left: 10px; /* Ajuste para dispositivos de tamanho médio */
+    }
+
+    .dashboard-name {
+        margin-left: 40px;
+    }
+
+    .nome {
+        margin-left: 15px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .painel {
+        width: 15%; /* Painel ocupa mais espaço em telas menores */
+    }
+
+    .painel:hover {
+        width: 25%;
+    }
+
+    .painel-content {
+        margin-left: 25%; /* Ajusta o conteúdo para a nova largura */
+    }
+
+    .perfil, .dashboard-icon, .user-icon {
+        margin-left: 5px; /* Ajuste em telas pequenas */
+    }
+
+    .dashboard-name {
+        margin-left: 30px;
+    }
+
+    .nome {
+        margin-left: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .painel {
+        width: 100%; /* Painel ocupa toda a largura em dispositivos muito pequenos */
+    }
+
+    .painel:hover {
+        width: 100%;
+    }
+
+    .painel-content {
+        margin-left: 0;
+    }
+
+    .perfil, .dashboard-icon, .user-icon {
+        margin-left: 10px; /* Ajuste em telas muito pequenas */
+    }
+
+    .dashboard-name {
+        margin-left: 20px;
+    }
+
+    .nome {
+        margin-left: 5px;
+    }
+}
