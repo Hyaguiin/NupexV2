@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importando useNavigate
 import './Login.scss'; // Se você tiver um arquivo CSS, use esse caminho
 
 const Login = () => {
@@ -6,6 +7,8 @@ const Login = () => {
     username: '',
     password: ''
   });
+
+  const navigate = useNavigate(); // Hook para navegação
 
   // Função para lidar com a mudança de valores nos campos de input
   const handleChange = (e) => {
@@ -80,7 +83,8 @@ const Login = () => {
             Entrar
           </button>
 
-          <p>Ainda não é registrado? <a href="#" className="link">Crie uma conta</a></p>
+          {/* Alterado para usar o useNavigate para redirecionar */}
+          <p>Ainda não é registrado? <a href="#" className="link" onClick={() => navigate('/register')}>Crie uma conta</a></p>
         </form>
       </div>
 

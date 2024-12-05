@@ -1,7 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Importando o useNavigate
 import './Painel.scss'; // Certifique-se de criar um arquivo de estilo para o painel, caso ainda não tenha
 
 function Painel() {
+  const navigate = useNavigate(); // Hook para navegação
+
+  // Função para lidar com o clique no botão de logout
+  const handleLogout = () => {
+    // Aqui você pode limpar qualquer dado de sessão, como o token, se necessário
+    navigate('/login'); // Redireciona para a página de login
+  };
+
   return (
     <div className="painel">
       <nav>
@@ -84,7 +93,7 @@ function Painel() {
         <div className="traco-logout"></div>
 
         {/* Seção de Logout */}
-        <div className="painel-content-logout">
+        <div className="painel-content-logout" onClick={handleLogout}>
           <div className="user-icon">
             <i className="dashboard-icon fas fa-sign-out-alt"></i>
             <span className="user-name">Logout</span>

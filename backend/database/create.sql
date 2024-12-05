@@ -26,3 +26,23 @@ CREATE TABLE projeto_nupex (
 -- Garantir que a tabela tenha a propriedade de proprietário
 ALTER TABLE IF EXISTS public.projeto_nupex
     OWNER TO postgres;
+
+
+
+CREATE TABLE usuario (
+  id SERIAL PRIMARY KEY,              
+  nome VARCHAR(100) NOT NULL,         
+  sobrenome VARCHAR(100) NOT NULL,     
+  email VARCHAR(255) UNIQUE NOT NULL,  
+  senha VARCHAR(255) NOT NULL,         
+  cargo VARCHAR(50) NOT NULL,         
+  termos_aceitos BOOLEAN NOT NULL,     
+  data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+  data_ultimo_login TIMESTAMP,        
+  token_reset_senha VARCHAR(255),    
+  status VARCHAR(50) DEFAULT 'ativo',
+  CONSTRAINT email_unico UNIQUE (email) 
+);
+
+
+
