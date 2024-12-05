@@ -22,8 +22,15 @@
     color: #333;
     width: 22%; /* Aumentando ainda mais a largura das colunas do cabeçalho */
     text-align: center;
+    border-right: 1px solid #ddd; /* Linha vertical separando as colunas */
+    padding-right: 10px; /* Espaço entre o texto e a borda */
 }
-  
+
+/* Para a última coluna, removemos a borda */
+.header-item:last-child {
+    border-right: none;
+}
+
 .projeto-item {
     background-color: #ffffff;
     padding: 12px;
@@ -33,12 +40,41 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative; /* Necessário para manipular o tamanho da borda */
 }
-  
+
 .projeto-detail {
     width: 22%; /* Aumentando a largura das colunas dos itens */
+    padding-right: 10px; /* Espaço entre o conteúdo e a borda */
 }
-  
+
+/* Para a última coluna, removemos a borda */
+.projeto-detail:last-child {
+    border-right: none;
+}
+
+/* Adicionando as divisórias verticais entre as colunas */
+.projeto-item::before,
+.projeto-item::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #ddd; /* Cor da divisória */
+}
+
+/* Ajustando as divisórias para cada posição entre as colunas */
+.projeto-item::before {
+    left: 22%; /* Ajuste de acordo com a largura das colunas */
+}
+
+.projeto-item::after {
+    left: 44%; /* Ajuste para a segunda divisão */
+}
+
+/* Para os outros campos, você pode adicionar mais divisórias verticais se necessário */
+
 .projeto-detail strong {
     font-weight: bold;
     color: #007bff;
@@ -48,13 +84,13 @@
     margin-left: 5px;
     color: #555;
 }
-  
+
 .projeto-actions {
     display: flex;
     justify-content: space-between;
     gap: 12px;
 }
-  
+
 .action-btn {
     padding: 8px 16px;
     background-color: #007bff;
@@ -65,26 +101,26 @@
     font-size: 14px;
     transition: background-color 0.3s;
 }
-  
+
 .action-btn:hover {
     background-color: #0056b3;
 }
-  
+
 .loading, .error, .no-projects {
     text-align: center;
     font-size: 16px;
     color: #555;
 }
-  
+
 /* Estilo para o carregamento, erro e nenhum projeto encontrado */
 .loading {
     color: #007bff;
 }
-  
+
 .error {
     color: red;
 }
-  
+
 .no-projects {
     color: grey;
 }

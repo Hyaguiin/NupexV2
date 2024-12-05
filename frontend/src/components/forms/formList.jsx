@@ -1,49 +1,120 @@
 import React, { useState, useEffect } from 'react';
-import { getAllProjetos } from '../../services/formularioService';
+import { getAllProjetos, deleteProjeto, updateProjeto } from '../../services/formularioService';
 import './formList.scss';
 
 function ListaProjetos() {
   const [projetos, setProjetos] = useState([]);
-  const [loading, setLoading] = useState(true); // Controle de loading
-  const [error, setError] = useState(null); // Controle de erro
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [editandoProjeto, setEditandoProjeto] = useState(null);  // Estado para armazenar o projeto sendo editado
+  const [projetoEditado, setProjetoEditado] = useState({});  // Estado para armazenar os dados editados
 
   useEffect(() => {
     const fetchProjetos = async () => {
       try {
         console.log("Fazendo requisição para obter projetos...");
-        
-        const data = await getAllProjetos(); // Chama o serviço que busca os projetos
+        const data = await getAllProjetos();
         console.log("Dados recebidos da API:", data);
-        
         setProjetos(data);
-        setLoading(false);  // Finaliza o loading
+        setLoading(false);
       } catch (err) {
         console.error("Erro ao carregar os projetos:", err);
         setError('Erro ao carregar os projetos');
-        setLoading(false);  // Finaliza o loading mesmo com erro
+        setLoading(false);
       }
     };
 
-    fetchProjetos();  // Executa a requisição na montagem do componente
-  }, []);  // O array vazio aqui garante que isso só aconteça uma vez
+    fetchProjetos();
+  }, []);
 
-  // Se estiver carregando, mostra a mensagem
+  // Função para lidar com a edição do projeto
+  const handleEdit = (projeto) => {
+    setEditandoProjeto(projeto); // Define o projeto que está sendo editado
+    setProjetoEditado(projeto);  // Preenche os campos do formulário com os dados do projeto
+  };
+
+  // Função para salvar as alterações no projeto
+  const handleSaveEdit = async () => {
+    try {
+      await updateProjeto(editandoProjeto.id, projetoEditado);
+      const projetosAtualizados = projetos.map(projeto =>
+        projeto.id === projetoEditado.id ? projetoEditado : projeto
+      );
+      setProjetos(projetosAtualizados);
+      setEditandoProjeto(null);  // Fecha o formulário de edição
+    } catch (err) {
+      console.error('Erro ao editar o projeto:', err);
+      setError('Erro ao editar o projeto');
+    }
+  };
+
+  // Função para excluir o projeto
+  const handleDelete = async (id) => {
+    try {
+      await deleteProjeto(id);
+      const projetosAtualizados = projetos.filter(projeto => projeto.id !== id);
+      setProjetos(projetosAtualizados);
+    } catch (err) {
+      console.error('Erro ao excluir o projeto:', err);
+      setError('Erro ao excluir o projeto');
+    }
+  };
+
   if (loading) {
     return <div className="loading">Carregando projetos...</div>;
   }
 
-  // Se houver um erro, exibe a mensagem de erro
   if (error) {
     return <div className="error">{error}</div>;
   }
 
-  // Se não houver projetos
   if (projetos.length === 0) {
     return <div className="no-projects">Nenhum projeto encontrado.</div>;
   }
 
   return (
     <div className="projetos-list">
+      {/* Formulário de Edição */}
+      {editandoProjeto && (
+        <div className="edit-form">
+          <h3>Editar Projeto</h3>
+          <div>
+            <label>Projeto:</label>
+            <input
+              type="text"
+              value={projetoEditado.projeto || ''}
+              onChange={(e) => setProjetoEditado({ ...projetoEditado, projeto: e.target.value })}
+            />
+          </div>
+          <div>
+            <label>Resumo:</label>
+            <input
+              type="text"
+              value={projetoEditado.resumo || ''}
+              onChange={(e) => setProjetoEditado({ ...projetoEditado, resumo: e.target.value })}
+            />
+          </div>
+          <div>
+            <label>Curso Coordenador:</label>
+            <input
+              type="text"
+              value={projetoEditado.curso_coordenador || ''}
+              onChange={(e) => setProjetoEditado({ ...projetoEditado, curso_coordenador: e.target.value })}
+            />
+          </div>
+          <div>
+            <label>Status:</label>
+            <input
+              type="text"
+              value={projetoEditado.status || ''}
+              onChange={(e) => setProjetoEditado({ ...projetoEditado, status: e.target.value })}
+            />
+          </div>
+          <button onClick={handleSaveEdit}>Salvar</button>
+          <button onClick={() => setEditandoProjeto(null)}>Cancelar</button>
+        </div>
+      )}
+
       <div className="projetos-header">
         <h4 className="header-item">Projeto</h4>
         <h4 className="header-item">Resumo</h4>
@@ -52,7 +123,6 @@ function ListaProjetos() {
         <h4 className="header-item">Ações</h4>
       </div>
 
-      {/* Renderizando os projetos */}
       {projetos.map((projeto) => (
         <div key={projeto.id} className="projeto-item">
           <div className="projeto-detail">
@@ -68,8 +138,8 @@ function ListaProjetos() {
             <strong>Status:</strong> <span>{projeto.status || 'Sem status'}</span>
           </div>
           <div className="projeto-actions">
-            <button className="action-btn">Editar</button>
-            <button className="action-btn">Excluir</button>
+            <button className="action-btn" onClick={() => handleEdit(projeto)}>Editar</button>
+            <button className="action-btn" onClick={() => handleDelete(projeto.id)}>Excluir</button>
           </div>
         </div>
       ))}
