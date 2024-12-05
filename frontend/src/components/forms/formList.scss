@@ -66,11 +66,11 @@
 
 /* Ajustando as divisórias para cada posição entre as colunas */
 .projeto-item::before {
-    left: 22%; /* Ajuste de acordo com a largura das colunas */
+    left: 20%; /* Ajuste de acordo com a largura das colunas */
 }
 
 .projeto-item::after {
-    left: 44%; /* Ajuste para a segunda divisão */
+    left: 58%; /* Ajuste para a segunda divisão */
 }
 
 /* Para os outros campos, você pode adicionar mais divisórias verticais se necessário */

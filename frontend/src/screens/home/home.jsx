@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import './home.scss'; // Supondo que você tenha um arquivo de estilo específico para esse componente
+import './home.scss';
 import FormularioPaginado from '../../components/forms/formPages';
 import ListaProjetos from '../../components/forms/formList';
+import Painel from '../../components/painel/Painel'; // Importando o componente Painel
 
 function Home() {
-  // Estado para controlar a exibição do formulário
   const [showForm, setShowForm] = useState(false);
 
-  // Função para alternar a exibição do formulário
   const toggleForm = () => {
     setShowForm(!showForm);
   };
@@ -44,106 +43,17 @@ function Home() {
         </button>
       </div>
 
-      
       {showForm && (
         <section>
           <FormularioPaginado />
         </section>
       )}
 
-      
       <section>
         <ListaProjetos />
       </section>
 
-      <div className="painel">
-        <nav>
-          <div className="painel-content-perfil">
-            <div className="perfil">
-              <img
-                id="foto"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3Ka3GhBZFUFekRFKz9BQTo6_xn5gWxf8wmg&s"
-                alt="Super Calistenico"
-              />
-              <span className="nome">Ian Barseagle</span>
-            </div>
-          </div>
-
-          <div className="painel-content">
-            <div className="user-icon">
-              <i className="dashboard-icon fas fa-th-large"></i>
-              <span className="user-name">Dashboard</span>
-            </div>
-          </div>
-
-          <div className="painel-content">
-            <div className="user-icon">
-              <i className="fas fa-users"></i>
-              <span className="user-name">Gerenciamento de Usuários</span>
-            </div>
-          </div>
-
-          <div className="painel-content">
-            <div className="user-icon">
-              <i className="fas fa-tasks"></i>
-              <span className="user-name">Gerenciamento de Projetos</span>
-            </div>
-          </div>
-
-          <div className="painel-content">
-            <div className="user-icon">
-              <i className="gerenciamentoProjeto fas fa-star"></i>
-              <span className="user-name">Avaliação de Projetos</span>
-            </div>
-          </div>
-
-          <div className="painel-content">
-            <div className="user-icon">
-              <i className="fas fa-clipboard-list"></i>
-              <span className="user-name">Admissão</span>
-            </div>
-          </div>
-
-          <div className="painel-content">
-            <div className="user-icon">
-              <i className="gerenciamentoProjeto fas fa-book"></i>
-              <span className="user-name">Avaliação</span>
-            </div>
-          </div>
-
-          <div className="painel-content">
-            <div className="user-icon">
-              <i className="gerenciamentoProjeto fas fa-medal"></i>
-              <span className="user-name">Ranking</span>
-            </div>
-          </div>
-
-          <div className="painel-content">
-            <div className="user-icon">
-              <i className="gerenciamentoProjeto fas fa-question-circle"></i>
-              <span className="user-name">Obter Ajuda</span>
-            </div>
-          </div>
-
-          <div className="painel-content">
-            <div className="user-icon">
-              <i className="dashboard-icon fas fa-cog"></i>
-              <span className="user-name">Configurações</span>
-            </div>
-          </div>
-
-          <div className="traco-logout"></div>
-
-          <div className="painel-content-logout">
-            <div className="user-icon">
-              <i className="dashboard-icon fas fa-sign-out-alt"></i>
-              <span className="user-name">Logout</span>
-            </div>
-          </div>
-
-          <div className="painel-content"></div>
-        </nav>
-      </div>
+      <Painel />
 
       {/* Link para Font Awesome */}
       <link

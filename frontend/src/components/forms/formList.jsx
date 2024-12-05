@@ -6,8 +6,9 @@ function ListaProjetos() {
   const [projetos, setProjetos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [editandoProjeto, setEditandoProjeto] = useState(null);  // Estado para armazenar o projeto sendo editado
-  const [projetoEditado, setProjetoEditado] = useState({});  // Estado para armazenar os dados editados
+  const [editandoProjeto, setEditandoProjeto] = useState(null);
+  const [projetoEditado, setProjetoEditado] = useState({});
+  const [showEscalaDuracao, setShowEscalaDuracao] = useState(false); // Estado para controle da exibição da escala de duração
 
   useEffect(() => {
     const fetchProjetos = async () => {
@@ -27,13 +28,11 @@ function ListaProjetos() {
     fetchProjetos();
   }, []);
 
-  // Função para lidar com a edição do projeto
   const handleEdit = (projeto) => {
-    setEditandoProjeto(projeto); // Define o projeto que está sendo editado
-    setProjetoEditado(projeto);  // Preenche os campos do formulário com os dados do projeto
+    setEditandoProjeto(projeto);
+    setProjetoEditado(projeto);
   };
 
-  // Função para salvar as alterações no projeto
   const handleSaveEdit = async () => {
     try {
       await updateProjeto(editandoProjeto.id, projetoEditado);
@@ -41,14 +40,13 @@ function ListaProjetos() {
         projeto.id === projetoEditado.id ? projetoEditado : projeto
       );
       setProjetos(projetosAtualizados);
-      setEditandoProjeto(null);  // Fecha o formulário de edição
+      setEditandoProjeto(null);
     } catch (err) {
       console.error('Erro ao editar o projeto:', err);
       setError('Erro ao editar o projeto');
     }
   };
 
-  // Função para excluir o projeto
   const handleDelete = async (id) => {
     try {
       await deleteProjeto(id);
@@ -58,6 +56,11 @@ function ListaProjetos() {
       console.error('Erro ao excluir o projeto:', err);
       setError('Erro ao excluir o projeto');
     }
+  };
+
+  const handleEscalaDuracao = (projeto) => {
+    // Função que abre ou fecha a exibição da escala de duração para o projeto
+    setShowEscalaDuracao(!showEscalaDuracao);
   };
 
   if (loading) {
@@ -74,7 +77,6 @@ function ListaProjetos() {
 
   return (
     <div className="projetos-list">
-      {/* Formulário de Edição */}
       {editandoProjeto && (
         <div className="edit-form">
           <h3>Editar Projeto</h3>
@@ -140,6 +142,7 @@ function ListaProjetos() {
           <div className="projeto-actions">
             <button className="action-btn" onClick={() => handleEdit(projeto)}>Editar</button>
             <button className="action-btn" onClick={() => handleDelete(projeto.id)}>Excluir</button>
+            <button className="action-btn" onClick={() => handleEscalaDuracao(projeto)}>Escala de Duração</button> {/* Novo botão */}
           </div>
         </div>
       ))}
