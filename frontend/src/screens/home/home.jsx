@@ -3,34 +3,25 @@ import './home.scss';
 import FormularioPaginado from '../../components/forms/formPages';
 import ListaProjetos from '../../components/forms/formList';
 import Painel from '../../components/painel/Painel'; // Importando o componente Painel
+import Header from '../../components/header/header'; // Importando o Header
+import FormGerenciamentoUsuarios from '../userMangmt/gerenciamentoUsuario'; // Importando corretamente
 
 function Home() {
   const [showForm, setShowForm] = useState(false);
+  const [showGerenciamento, setShowGerenciamento] = useState(false); // Estado para mostrar o gerenciamento de usuários
 
   const toggleForm = () => {
     setShowForm(!showForm);
   };
 
+  const toggleGerenciamento = () => {
+    setShowGerenciamento(!showGerenciamento); // Alterna a visibilidade do componente de gerenciamento
+  };
+
   return (
     <div className="app-management">
-      <header className="header">
-        <div className="container-name">
-          <img
-            className="logoFacisa"
-            src="https://upload.wikimedia.org/wikipedia/commons/6/66/Unifacisabasquete.png"
-            alt="Logo Facisa"
-          />
-          <h1 className="text-logo">
-            Gestão <span className="cor">Nupex</span>
-          </h1>
-          <img
-            className="aces"
-            src="https://inclusivepixel.com/wp-content/uploads/noun_Accessibility_975768-1.png"
-            alt=""
-          />
-        </div>
-      </header>
-      <div className="traco"></div>
+      
+      
       <h1 className="Projetos">
         <span className="projeto-cor">Meus Projetos</span>
       </h1>
@@ -53,7 +44,11 @@ function Home() {
         <ListaProjetos />
       </section>
 
-      <Painel />
+      {/* Renderiza o painel */}
+      <Painel onGerenciamentoClick={toggleGerenciamento} />
+
+      {/* Renderiza o componente de gerenciamento de usuários se o estado showGerenciamento for true */}
+      {showGerenciamento && <FormGerenciamentoUsuarios />}
 
       {/* Link para Font Awesome */}
       <link

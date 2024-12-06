@@ -11,6 +11,16 @@ function Painel() {
     navigate('/login'); // Redireciona para a página de login
   };
 
+  // Função para lidar com o clique no item de "Gerenciamento de Usuários"
+  const handleGerenciamento = () => {
+    navigate('/gerenciamentoUsuario'); // Redireciona para a página de gerenciamento
+  };
+
+  // Função para lidar com o clique no item "Dashboard"
+  const handleDashboard = () => {
+    navigate('/home'); // Redireciona para a página de dashboard (home)
+  };
+
   return (
     <div className="painel">
       <nav>
@@ -27,14 +37,15 @@ function Painel() {
         </div>
 
         {/* Itens de Navegação */}
-        <div className="painel-content">
+        <div className="painel-content" onClick={handleDashboard}>
           <div className="user-icon">
             <i className="dashboard-icon fas fa-th-large"></i>
             <span className="user-name">Dashboard</span>
           </div>
         </div>
 
-        <div className="painel-content">
+        {/* Alteração aqui - ao clicar, vai para /gerenciamento */}
+        <div className="painel-content" onClick={handleGerenciamento}>
           <div className="user-icon">
             <i className="fas fa-users"></i>
             <span className="user-name">Gerenciamento de Usuários</span>

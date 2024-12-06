@@ -30,18 +30,15 @@ ALTER TABLE IF EXISTS public.projeto_nupex
 
 
 CREATE TABLE usuario (
-  id SERIAL PRIMARY KEY,              
-  nome VARCHAR(100) NOT NULL,         
-  sobrenome VARCHAR(100) NOT NULL,     
-  email VARCHAR(255) UNIQUE NOT NULL,  
-  senha VARCHAR(255) NOT NULL,         
-  cargo VARCHAR(50) NOT NULL,         
-  termos_aceitos BOOLEAN NOT NULL,     
-  data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
-  data_ultimo_login TIMESTAMP,        
-  token_reset_senha VARCHAR(255),    
-  status VARCHAR(50) DEFAULT 'ativo',
-  CONSTRAINT email_unico UNIQUE (email) 
+    id SERIAL PRIMARY KEY,  -- ID único para cada usuário
+    nome VARCHAR(255) NOT NULL,  -- Nome do usuário
+    sobrenome VARCHAR(255) NOT NULL,  -- Sobrenome do usuário
+    coordenador_ou_professor VARCHAR(50) NOT NULL,  -- Tipo de usuário, coordenador ou professor
+    email VARCHAR(255) UNIQUE NOT NULL,  -- Email único
+    senha VARCHAR(255) NOT NULL,  -- Senha do usuário
+    aceita_termos_condicoes BOOLEAN,  -- Indica se o usuário aceitou os termos
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Data de criação do usuário
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  -- Data da última atualização
 );
 
 

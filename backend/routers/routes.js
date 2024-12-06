@@ -13,6 +13,14 @@ router.put('/projeto_nupex/:id', ProjetoController.update);
 router.delete('/projeto_nupex/:id', ProjetoController.delete);
 
 
+
+router.post('/usuario', UsuarioController.insert);
+router.get('/usuario', UsuarioController.getAll);
+router.get('/usuario/:id', UsuarioController.getById);
+router.put('/usuario/:id', UsuarioController.update);
+router.delete('/usuario/:id', UsuarioController.delete);
+
+
 //P login
 router.post('/login', validarRequisicao(loginSchema), UsuarioController.login)
 

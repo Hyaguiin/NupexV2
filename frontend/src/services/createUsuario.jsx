@@ -2,7 +2,7 @@ import axios from 'axios';
 import BASE_URL from '../constants/base_url';
 
 // Define a URL base para as requisições da tabela de funcionários
-const URL = `${BASE_URL}/usuario`;
+const URL = `${BASE_URL}/gerenciamentoUsuario`;
 
 // Função para obter todos os funcionários
 async function getAllUsuario() {
