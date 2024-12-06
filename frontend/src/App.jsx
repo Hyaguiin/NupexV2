@@ -9,7 +9,6 @@ import Header from './components/header/Header';
 import Painel from './components/painel/Painel'; // Componente Painel
 import PrivateRoute from './components/private/privateRoute';
 
-// Layout principal que inclui Header e Painel
 function Layout() {
   return (
     <div>
