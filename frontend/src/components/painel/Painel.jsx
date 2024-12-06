@@ -25,6 +25,10 @@ function Painel() {
     navigate('/home'); // Redireciona para a página de dashboard (home)
   };
 
+  const handleAvaliacaoProjetos = () => {
+    navigate('/avaliacaoProjeto'); // Redireciona para a página de avaliação de projetos
+  };
+
   return (
     <div className="painel">
       <nav>
@@ -38,7 +42,9 @@ function Painel() {
               alt={user?.nome || 'Usuário'} // Exibe o nome ou "Usuário" se não existir
             />
             {/* Exibindo o nome completo do usuário */}
-            <span className="nome">{user?.nome} {user?.sobrenome || ''}</span> {/* Nome completo */}
+            <span className="nome">
+              {user?.nome} {user?.sobrenome ? user.sobrenome : ''} {/* Exibe nome e sobrenome */}
+            </span>
           </div>
         </div>
 
@@ -59,51 +65,51 @@ function Painel() {
         </div>
 
         {/* Outros itens */}
-        <div className="painel-content">
+        <div className="painel-content" onClick={() => navigate('/gerenciamentoProjetos')}>
           <div className="user-icon">
             <i className="fas fa-tasks"></i>
             <span className="user-name">Gerenciamento de Projetos</span>
           </div>
         </div>
 
-        <div className="painel-content">
+        <div className="painel-content" onClick= {handleAvaliacaoProjetos}>
           <div className="user-icon">
-            <i className="gerenciamentoProjeto fas fa-star"></i>
+            <i className="fas fa-star"></i>
             <span className="user-name">Avaliação de Projetos</span>
           </div>
         </div>
 
-        <div className="painel-content">
+        <div className="painel-content" onClick={() => navigate('/admissao')}>
           <div className="user-icon">
             <i className="fas fa-clipboard-list"></i>
             <span className="user-name">Admissão</span>
           </div>
         </div>
 
-        <div className="painel-content">
+        <div className="painel-content" onClick={() => navigate('/avaliacao')}>
           <div className="user-icon">
-            <i className="gerenciamentoProjeto fas fa-book"></i>
+            <i className="fas fa-book"></i>
             <span className="user-name">Avaliação</span>
           </div>
         </div>
 
-        <div className="painel-content">
+        <div className="painel-content" onClick={() => navigate('/ranking')}>
           <div className="user-icon">
-            <i className="gerenciamentoProjeto fas fa-medal"></i>
+            <i className="fas fa-medal"></i>
             <span className="user-name">Ranking</span>
           </div>
         </div>
 
-        <div className="painel-content">
+        <div className="painel-content" onClick={() => navigate('/ajuda')}>
           <div className="user-icon">
-            <i className="gerenciamentoProjeto fas fa-question-circle"></i>
+            <i className="fas fa-question-circle"></i>
             <span className="user-name">Obter Ajuda</span>
           </div>
         </div>
 
-        <div className="painel-content">
+        <div className="painel-content" onClick={() => navigate('/configuracoes')}>
           <div className="user-icon">
-            <i className="dashboard-icon fas fa-cog"></i>
+            <i className="fas fa-cog"></i>
             <span className="user-name">Configurações</span>
           </div>
         </div>
@@ -113,7 +119,7 @@ function Painel() {
         {/* Seção de Logout */}
         <div className="painel-content-logout" onClick={handleLogout}>
           <div className="user-icon">
-            <i className="dashboard-icon fas fa-sign-out-alt"></i>
+            <i className="fas fa-sign-out-alt"></i>
             <span className="user-name">Logout</span>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import jwtDecode from 'jwt-decode';  // Corrigido para garantir que o jwtDecode é usado corretamente
+import jwtDecode from "jwt-decode";
+import { getUsuarioById } from "../services/createUsuario"; // Importando o serviço que busca os dados do usuário
 
 export const AuthContext = createContext();
 
@@ -8,65 +9,67 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const loadUserFromToken = () => {
-      const token = localStorage.getItem("token");
-      console.log("Verificando token no localStorage:", token);  // Log para verificar o token armazenado
-      
-      if (token) {
-        try {
-          const decodedToken = jwtDecode(token);  // Agora 'jwtDecode' deve funcionar corretamente
-          console.log("Token decodificado:", decodedToken);  // Log para verificar o conteúdo do token decodificado
-    
-          const currentTime = Date.now() / 1000;  // Tempo atual em segundos
-          console.log("Tempo atual:", currentTime);  // Log para verificar o tempo atual
-    
-          if (decodedToken.exp > currentTime) {
-            console.log("Token válido, usuário autenticado.");  // Log indicando que o token é válido
-            setUser({ ...decodedToken, token, role: decodedToken.role }); // Atualiza o estado do usuário
-          } else {
-            console.log("Token expirado, removendo do localStorage.");  // Log quando o token expirou
-            localStorage.removeItem("token");
-            setUser(null);
-          }
-        } catch (error) {
-          console.error("Token inválido ou erro ao decodificar", error);  // Log de erro caso o token não seja válido
-        }
-      } else {
-        console.log("Nenhum token encontrado no localStorage.");  // Log quando não houver token
-        setUser(null);  // Se não houver token, remove o usuário
-      }
-      
-      setLoading(false);  // Define que o carregamento foi concluído
-      console.log("Loading completo.");  // Log indicando que o estado de carregamento foi atualizado
-    };
-    
-    loadUserFromToken(); // Chama a função ao carregar o componente
+  // Função para carregar o usuário a partir do token armazenado no localStorage
+  const loadUserFromToken = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        console.log("Token decodificado:", decodedToken);
+        const currentTime = Date.now() / 1000;
 
-    // Adiciona o listener para detectar mudanças no localStorage
+        if (decodedToken.exp > currentTime) {
+          // O token é válido, agora buscar os dados do usuário
+          const userData = await getUsuarioById(decodedToken.id); // Passa o id do usuário para buscar os dados completos
+          console.log("Token válido, usuário autenticado.");
+          console.log("Dados do usuário:", userData);
+          setUser({ ...decodedToken, ...userData }); // Agora o estado do usuário inclui dados do serviço
+        } else {
+          console.log("Token expirado, removendo...");
+          localStorage.removeItem("token");
+          setUser(null);
+        }
+      } catch (error) {
+        console.error("Erro ao decodificar o token ou buscar o usuário:", error);
+        setUser(null); // Em caso de erro, remove o usuário
+      }
+    } else {
+      console.log("Token não encontrado no localStorage.");
+      setUser(null); // Caso não exista token
+    }
+
+    setLoading(false); // Defina o loading como false após a verificação do token
+  };
+
+  // Carrega o usuário sempre que o componente for montado
+  useEffect(() => {
+    loadUserFromToken();
+
+    // Atualiza o usuário caso o token no localStorage seja alterado (por exemplo, após o logout)
     window.addEventListener("storage", loadUserFromToken);
 
-    // Remove o listener quando o componente desmonta
     return () => {
       window.removeEventListener("storage", loadUserFromToken);
     };
-  }, []); // Esse efeito será executado uma vez ao montar o componente
+  }, []); // Este useEffect é executado apenas uma vez ao montar o componente
 
+  // Função para realizar o login
   const login = (token) => {
     try {
-      const decodedToken = jwtDecode(token);  // Usando jwtDecode no login também
-      localStorage.setItem("token", token);
-      setUser({ ...decodedToken, token });
-      console.log('Login realizado, usuário:', decodedToken); // Logando o login
+      const decodedToken = jwtDecode(token);
+      console.log("Decoded Token no Login:", decodedToken);
+      localStorage.setItem("token", token); // Armazena o token no localStorage
+      setUser({ ...decodedToken }); // Atualiza o estado do usuário imediatamente após o login
     } catch (error) {
       console.error("Erro ao fazer login", error);
     }
   };
 
+  // Função para realizar o logout
   const logout = () => {
-    localStorage.removeItem("token");
-    setUser(null);
-    console.log('Logout realizado, usuário removido');
+    console.log("Logout realizado.");
+    localStorage.removeItem("token"); // Remove o token do localStorage
+    setUser(null); // Limpa o estado do usuário
   };
 
   return (

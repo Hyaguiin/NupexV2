@@ -187,7 +187,7 @@ const Register = () => {
       </div>
 
       <div className="image-container">
-        <img src="../../../assets/img/nupex.PNG" alt="Exemplo Nupex" />
+      <img src="/assets/images/nupex.PNG" alt="Exemplo Foto Nupex" />
       </div>
     </div>
   );

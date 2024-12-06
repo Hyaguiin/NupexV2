@@ -7,7 +7,8 @@ import Home from './screens/home/home'; // Página inicial
 import FormGerenciamentoUsuarios from './screens/userMangmt/gerenciamentoUsuario'; // Página de gerenciamento de usuários
 import Header from './components/header/Header';
 import Painel from './components/painel/Painel'; // Componente Painel
-import PrivateRoute from './components/private/privateRoute';
+import PrivateRoute from './components/private/privateRoute'; // Importe o PrivateRoute
+import AvaliacaoProjetos from './screens/avaliacaoProjeto/avaliacaoProjeto'; // Página de Avaliação de Projetos
 
 function Layout() {
   return (
@@ -33,6 +34,12 @@ function App() {
             <Route 
               path="gerenciamentoUsuario" 
               element={<PrivateRoute element={<FormGerenciamentoUsuarios />} />} 
+            /> 
+
+            {/* Rota protegida para Avaliação de Projetos */}
+            <Route 
+              path="avaliacaoProjeto" 
+              element={<PrivateRoute element={<AvaliacaoProjetos />} />} 
             /> 
           </Route>
 

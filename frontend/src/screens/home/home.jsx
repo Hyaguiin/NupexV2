@@ -4,11 +4,11 @@ import FormularioPaginado from '../../components/forms/formPages';
 import ListaProjetos from '../../components/forms/formList';
 import Painel from '../../components/painel/Painel'; // Importando o componente Painel
 import Header from '../../components/header/Header'; // Importando o Header
-import FormGerenciamentoUsuarios from '../userMangmt/gerenciamentoUsuario'; // Importando corretamente
+import FormGerenciamentoUsuarios from '../userMangmt/gerenciamentoUsuario'; 
 
 function Home() {
   const [showForm, setShowForm] = useState(false);
-  const [showGerenciamento, setShowGerenciamento] = useState(false); // Estado para mostrar o gerenciamento de usuários
+  const [showGerenciamento, setShowGerenciamento] = useState(false); 
 
   const toggleForm = () => {
     setShowForm(!showForm);
