@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { createUsuario } from '../../services/createUsuario'; // Importe a função createUsuario do seu serviço
+import { createUsuario } from '../../services/createUsuario'; // Importe a função createUsuario
+import ListaUsuarios from '../../components/forms/userList'; // Importe o componente ListaUsuarios
 import './gerenciamentoUsuario.scss';
 
 function FormGerenciamentoUsuarios() {
   const [formData, setFormData] = useState({
-    primeiroNome: '',
+    nome: '',
     sobrenome: '',
     matricula: '',
-    login: '',
+    senha: '',
     email: '',
-    cargo: '', // O valor para cargo será atualizado com o select
+    coordenador_ou_professor: '', // O valor para cargo será atualizado com o select
   });
 
   // Função para manipular as mudanças no formulário
@@ -47,9 +48,9 @@ function FormGerenciamentoUsuarios() {
             <div className="form-group">
               <input
                 type="text"
-                id="primeiroNome"
-                name="primeiroNome"
-                value={formData.primeiroNome}
+                id="nome"
+                name="nome"
+                value={formData.nome}
                 onChange={handleChange}
                 placeholder="Primeiro Nome"
                 required
@@ -85,9 +86,9 @@ function FormGerenciamentoUsuarios() {
             <div className="form-group">
               <input
                 type="text"
-                id="login"
-                name="login"
-                value={formData.login}
+                id="senha"
+                name="senha"
+                value={formData.senha}
                 onChange={handleChange}
                 placeholder="Login"
                 required
@@ -108,9 +109,9 @@ function FormGerenciamentoUsuarios() {
 
             <div className="form-group">
               <select
-                id="cargo"
-                name="cargo"
-                value={formData.cargo}
+                id="coordenador_ou_professor"
+                name="coordenador_ou_professor"
+                value={formData.coordenador_ou_professor}
                 onChange={handleChange}
                 required
               >
@@ -124,6 +125,9 @@ function FormGerenciamentoUsuarios() {
           <button type="submit">Salvar</button>
         </form>
       </div>
+
+      {/* Aqui você chama o componente ListaUsuarios */}
+      <ListaUsuarios />
     </div>
   );
 }
