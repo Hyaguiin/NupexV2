@@ -1,0 +1,25 @@
+/* CSS */
+.page-wrapper {
+    display: flex;
+    flex-direction: column; /* O cabeçalho vai para o topo */
+    min-height: 100vh;
+  }
+  
+  .main-content {
+    display: flex; /* Organiza o painel e o conteúdo lado a lado */
+    flex: 1;
+  }
+  
+  .left-side {
+    width: 250px; /* Ajuste conforme necessário */
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+  }
+  
+  .content-wrapper {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+  }
+  

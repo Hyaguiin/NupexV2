@@ -3,7 +3,7 @@ import './home.scss';
 import FormularioPaginado from '../../components/forms/formPages';
 import ListaProjetos from '../../components/forms/formList';
 import Painel from '../../components/painel/Painel'; // Importando o componente Painel
-import Header from '../../components/header/header'; // Importando o Header
+import Header from '../../components/header/Header'; // Importando o Header
 import FormGerenciamentoUsuarios from '../userMangmt/gerenciamentoUsuario'; // Importando corretamente
 
 function Home() {

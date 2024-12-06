@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom'; 
 import Home from './screens/home/home'; // Página inicial
 import FormGerenciamentoUsuarios from './screens/userMangmt/gerenciamentoUsuario'; // Página de gerenciamento de usuários
-import Header from './components/header/header'; // Componente Header
+import Header from './components/header/Header';
 import Painel from './components/painel/Painel'; // Componente Painel
 
 // Layout principal que inclui Header e Painel
