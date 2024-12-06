@@ -112,7 +112,7 @@ const Login = () => {
       </div>
 
       <div className="image-container">
-        <img src="../frontend/src/assets/images/nupex.PNG" alt="Exemplo Foto Nupex" />
+      <img src="/assets/images/nupex.PNG" alt="Exemplo Foto Nupex" />
       </div>
     </div>
   );

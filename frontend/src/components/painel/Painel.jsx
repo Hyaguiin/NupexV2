@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom'; // Importando o useNavigate
+import { AuthContext } from '../../context/AuthContext'; // Importando o AuthContext
 import './Painel.scss'; // Certifique-se de criar um arquivo de estilo para o painel, caso ainda não tenha
 
 function Painel() {
   const navigate = useNavigate(); // Hook para navegação
 
+  // Obtendo os dados do usuário do contexto
+  const { user, logout } = useContext(AuthContext);
+
   // Função para lidar com o clique no botão de logout
   const handleLogout = () => {
-    // Aqui você pode limpar qualquer dado de sessão, como o token, se necessário
+    logout(); // Usando o logout do AuthContext
     navigate('/login'); // Redireciona para a página de login
   };
 
@@ -27,12 +31,14 @@ function Painel() {
         {/* Seção de Perfil */}
         <div className="painel-content-perfil">
           <div className="perfil">
+            {/* Exibindo a foto do usuário ou uma foto padrão */}
             <img
               id="foto"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3Ka3GhBZFUFekRFKz9BQTo6_xn5gWxf8wmg&s"
-              alt="Super Calistenico"
+              src={user?.foto || 'https://via.placeholder.com/150'} // Exibe foto do usuário ou uma foto padrão
+              alt={user?.nome || 'Usuário'} // Exibe o nome ou "Usuário" se não existir
             />
-            <span className="nome">Ian Barseagle</span>
+            {/* Exibindo o nome completo do usuário */}
+            <span className="nome">{user?.nome} {user?.sobrenome || ''}</span> {/* Nome completo */}
           </div>
         </div>
 
@@ -52,6 +58,7 @@ function Painel() {
           </div>
         </div>
 
+        {/* Outros itens */}
         <div className="painel-content">
           <div className="user-icon">
             <i className="fas fa-tasks"></i>
