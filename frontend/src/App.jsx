@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom'; 
+import Login from './components/login/login';
+import Register from './components/register/register';
 import Home from './screens/home/home'; // Página inicial
 import FormGerenciamentoUsuarios from './screens/userMangmt/gerenciamentoUsuario'; // Página de gerenciamento de usuários
 import Header from './components/header/Header';
@@ -26,6 +28,10 @@ function App() {
           <Route path="home" element={<Home />} /> {/* Adiciona a rota "/home" */}
           <Route path="gerenciamentoUsuario" element={<FormGerenciamentoUsuarios />} /> {/* Página de gerenciamento */}
         </Route>
+
+        {/* Páginas de login e registro sem o Layout */}
+        <Route path="login" element={<Login />} /> 
+        <Route path="register" element={<Register />} /> 
       </Routes>
     </Router>
   );

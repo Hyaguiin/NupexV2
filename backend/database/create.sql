@@ -29,6 +29,10 @@ ALTER TABLE IF EXISTS public.projeto_nupex
 
 
 
+-- Table: public.usuario
+
+--DROP TABLE IF EXISTS public.usuario;
+
 CREATE TABLE usuario (
     id SERIAL PRIMARY KEY,  -- ID único para cada usuário
     nome VARCHAR(255) NOT NULL,  -- Nome do usuário
@@ -41,5 +45,16 @@ CREATE TABLE usuario (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  -- Data da última atualização
 );
 
+ALTER TABLE public.usuario
+  ALTER COLUMN aceita_termos_condicoes SET DEFAULT NULL;  -- Torna o campo aceitando valores nulos
+-- Se quiser remover qualquer restrição "NOT NULL" para a coluna:
+ALTER TABLE public.usuario
+  ALTER COLUMN aceita_termos_condicoes DROP NOT NULL;  -- Remove a restrição "NOT NULL" da coluna
+
+ALTER TABLE public.usuario
+  ALTER COLUMN coordenador_ou_professor DROP NOT NULL;
+
+ALTER TABLE IF EXISTS public.usuario
+    OWNER to postgres;
 
 

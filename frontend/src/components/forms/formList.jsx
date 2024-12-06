@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import ReactSwitch from 'react-switch';  // Importando o Switch
 import { getAllProjetos, deleteProjeto, updateProjeto } from '../../services/formularioService';
 import './formList.scss';
-import ProjectList from './ProjectList'; // Importe o componente ProjectList
+import ProjectList from './ProjectList';
 
 function ListaProjetos() {
   const [projetos, setProjetos] = useState([]);
@@ -11,28 +12,25 @@ function ListaProjetos() {
   const [projetoEditado, setProjetoEditado] = useState({});
   const [projetosComEscalaVisible, setProjetosComEscalaVisible] = useState({});
   const [duracaoProjeto, setDuracaoProjeto] = useState({});
-  const [showProjectList, setShowProjectList] = useState(false); // Controle para mostrar o ProjectList
-  const [selectedProjeto, setSelectedProjeto] = useState(null); // Para armazenar o projeto selecionado
+  const [showProjectList, setShowProjectList] = useState(false);
+  const [selectedProjeto, setSelectedProjeto] = useState(null);
 
   // Função para truncar o resumo
   const truncateText = (text, maxLength) => {
     if (text && text.length > maxLength) {
-      return text.slice(0, maxLength) + '...'; // Corta e adiciona '...'
+      return text.slice(0, maxLength) + '...';
     }
-    return text; // Retorna o texto sem alterações se não ultrapassar o limite
+    return text;
   };
 
   // Carregar os projetos
   useEffect(() => {
     const fetchProjetos = async () => {
       try {
-        console.log("Fazendo requisição para obter projetos...");
         const data = await getAllProjetos();
-        console.log("Dados recebidos da API:", data);
         setProjetos(data);
         setLoading(false);
       } catch (err) {
-        console.error("Erro ao carregar os projetos:", err);
         setError('Erro ao carregar os projetos');
         setLoading(false);
       }
@@ -56,7 +54,6 @@ function ListaProjetos() {
       setProjetos(projetosAtualizados);
       setEditandoProjeto(null);
     } catch (err) {
-      console.error('Erro ao editar o projeto:', err);
       setError('Erro ao editar o projeto');
     }
   };
@@ -68,7 +65,6 @@ function ListaProjetos() {
       const projetosAtualizados = projetos.filter(projeto => projeto.id !== id);
       setProjetos(projetosAtualizados);
     } catch (err) {
-      console.error('Erro ao excluir o projeto:', err);
       setError('Erro ao excluir o projeto');
     }
   };
@@ -97,8 +93,8 @@ function ListaProjetos() {
 
   // Fechar o modal de visualização
   const handleCloseModal = () => {
-    setShowProjectList(false);
-    setSelectedProjeto(null);
+    setShowUserDetails(false);
+    setSelectedUsuario(null);
   };
 
   if (loading) {
@@ -144,10 +140,13 @@ function ListaProjetos() {
           </div>
           <div>
             <label>Status:</label>
-            <input
-              type="text"
-              value={projetoEditado.status || ''}
-              onChange={(e) => setProjetoEditado({ ...projetoEditado, status: e.target.value })}
+            <ReactSwitch
+              checked={projetoEditado.status === 'Ativo'}
+              onChange={(checked) => setProjetoEditado({ ...projetoEditado, status: checked ? 'Ativo' : 'Inativo' })}
+              offColor="#888"
+              onColor="#4CAF50"
+              offHandleColor="#ccc"
+              onHandleColor="#fff"
             />
           </div>
           <button onClick={handleSaveEdit}>Salvar</button>
@@ -181,7 +180,7 @@ function ListaProjetos() {
             <button className="action-btn" onClick={() => handleEdit(projeto)}>Editar</button>
             <button className="action-btn" onClick={() => handleDelete(projeto.id)}>Excluir</button>
             <button className="action-btn" onClick={() => toggleEscalaDuracao(projeto.id)}>Escala de Duração</button>
-            <button className="action-btn" onClick={() => handleVisualizar(projeto)}>Visualizar</button> {/* Botão Visualizar */}
+            <button className="action-btn" onClick={() => handleVisualizar(projeto)}>Visualizar</button>
           </div>
 
           {/* Exibição da Escala de Duração */}
@@ -209,7 +208,7 @@ function ListaProjetos() {
             <h2>Detalhes do Projeto</h2>
             <button onClick={handleCloseModal}>Fechar</button>
             <div className="modal-body">
-              <ProjectList projeto={selectedProjeto} /> {/* Passando o projeto selecionado */}
+              <ProjectList projeto={selectedProjeto} />
             </div>
           </div>
         </div>
