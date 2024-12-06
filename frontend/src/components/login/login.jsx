@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importando useNavigate
-import './Login.scss'; // Se você tiver um arquivo CSS, use esse caminho
+import { useNavigate } from 'react-router-dom'; 
+import './Login.scss'; 
+import { loginUsuario } from '../../services/createUsuario'; 
+import { toast, ToastContainer } from 'react-toastify'; // Importando toast e ToastContainer
+import 'react-toastify/dist/ReactToastify.css'; // Importando o CSS do toast
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -20,14 +23,32 @@ const Login = () => {
   };
 
   // Função para lidar com o envio do formulário
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aqui você pode adicionar a lógica para o login, como uma chamada à API
-    console.log('Login enviado com:', credentials);
+    try {
+      // Tenta realizar o login
+      const { username, password } = credentials;
+      const response = await loginUsuario({ email: username, senha: password });
+
+      // Armazena o token no localStorage
+      localStorage.setItem('token', response.token);
+
+      // Redireciona para a página '/home'
+      navigate('/home');
+
+      // Exibe uma notificação de sucesso
+      toast.success("Login bem-sucedido!");
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
+      toast.error('Email ou senha incorretos. Tente novamente!'); // Exibe uma notificação de erro
+    }
   };
 
   return (
     <div className="login-container">
+      {/* Adicionando o ToastContainer aqui */}
+      <ToastContainer />
+
       <div className="form-container">
         <div className="logo">
           <div className="container-name">
@@ -83,7 +104,6 @@ const Login = () => {
             Entrar
           </button>
 
-          {/* Alterado para usar o useNavigate para redirecionar */}
           <p>Ainda não é registrado? <a href="#" className="link" onClick={() => navigate('/register')}>Crie uma conta</a></p>
         </form>
       </div>
