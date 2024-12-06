@@ -1,97 +1,110 @@
-import React, { useEffect, useState } from 'react';
-import { getAllProjetos } from '../../services/formularioService'; // Importando o serviço
+import React, { useState } from 'react';
 import './avaliacaoProjeto.scss'; 
 
 function AvaliacaoProjetos() {
-  const [projetos, setProjetos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedProjeto, setSelectedProjeto] = useState(null);
-  const [avaliacao, setAvaliacao] = useState('');
-  const [comentario, setComentario] = useState('');
+  const [projeto, setProjeto] = useState('');
+  const [modalidade, setModalidade] = useState(''); // Estado para a modalidade
+  const [proponente, setProponente] = useState(''); // Estado para o proponente
+  const [curso, setCurso] = useState(''); // Estado para o curso
+  const [comentariosRelator, setComentariosRelator] = useState(''); // Novo estado para Comentários do Relator
 
-  // Função para buscar os projetos
-  const fetchProjetos = async () => {
-    try {
-      const data = await getAllProjetos();
-      setProjetos(data);
-      setLoading(false);
-    } catch (error) {
-      console.error("Erro ao buscar projetos", error);
-      setLoading(false);
-    }
-  };
-
-  // Função para enviar a avaliação
-  const handleAvaliar = async () => {
-    if (!selectedProjeto || !avaliacao || !comentario) {
-      alert("Por favor, selecione um projeto, insira uma avaliação e um comentário.");
+  // Função para enviar o formulário
+  const handleSubmit = () => {
+    if (!projeto || !modalidade || !proponente || !curso || !comentariosRelator) {
+      alert("Por favor, preencha todos os campos.");
       return;
     }
 
-    // Aqui você pode enviar a avaliação usando um serviço de atualização, por exemplo
-    console.log("Avaliação enviada", { projetoId: selectedProjeto.id, avaliacao, comentario });
-
-    // Limpar os campos após a avaliação
-    setSelectedProjeto(null);
-    setAvaliacao('');
-    setComentario('');
+    // Aqui você pode processar os dados
+    console.log("Dados enviados", { projeto, modalidade, proponente, curso, comentariosRelator });
+    
+    // Limpar os campos após o envio
+    setProjeto('');
+    setModalidade('');
+    setProponente('');
+    setCurso('');
+    setComentariosRelator('');
   };
-
-  // Carregar os projetos ao montar o componente
-  useEffect(() => {
-    fetchProjetos();
-  }, []);
 
   return (
     <div className="avaliacao-projetos">
-      <h1>Avaliação de Projetos</h1>
+      <div className="container-formulario">
+        <h1 className='tituloArea'>Formulário de Admissão de proposta do Projeto</h1>
 
-      {loading ? (
-        <p>Carregando projetos...</p>
-      ) : (
-        <div className="projetos-list">
-          <h2>Selecione um projeto para avaliar</h2>
-          <ul>
-            {projetos.map((projeto) => (
-              <li
-                key={projeto.id}
-                className={selectedProjeto?.id === projeto.id ? 'selected' : ''}
-                onClick={() => setSelectedProjeto(projeto)}
-              >
-                {projeto.nome}
-              </li>
-            ))}
-          </ul>
+        {/* Formulário com os campos verticais */}
+        <div className="input-group-vertical">
+          <div className="input-item">
+            <label>Projeto:</label>
+            <input 
+              type="text" 
+              value={projeto} 
+              onChange={(e) => setProjeto(e.target.value)} 
+              placeholder="Nome do Projeto" 
+            />
+          </div>
 
-          {selectedProjeto && (
-            <div className="avaliacao-form">
-              <h3>Avalie o projeto: {selectedProjeto.nome}</h3>
-              <div className="input-group">
-                <label>Avaliação:</label>
-                <select value={avaliacao} onChange={(e) => setAvaliacao(e.target.value)}>
-                  <option value="">Escolha uma avaliação</option>
-                  <option value="1">1 - Ruim</option>
-                  <option value="2">2 - Regular</option>
-                  <option value="3">3 - Bom</option>
-                  <option value="4">4 - Muito Bom</option>
-                  <option value="5">5 - Excelente</option>
-                </select>
-              </div>
-
-              <div className="input-group">
-                <label>Comentário:</label>
-                <textarea
-                  value={comentario}
-                  onChange={(e) => setComentario(e.target.value)}
-                  placeholder="Deixe um comentário sobre o projeto"
+          <div className="input-item">
+            <label>Modalidade:</label>
+            <div className="radio-group">
+              <label>
+                <input
+                  type="radio"
+                  name="modalidade"
+                  value="Pesquisa"
+                  checked={modalidade === 'Pesquisa'}
+                  onChange={(e) => setModalidade(e.target.value)}
                 />
-              </div>
-
-              <button onClick={handleAvaliar}>Enviar Avaliação</button>
+                Pesquisa
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="modalidade"
+                  value="Extensao"
+                  checked={modalidade === 'Extensao'}
+                  onChange={(e) => setModalidade(e.target.value)}
+                />
+                Extensão
+              </label>
             </div>
-          )}
+          </div>
+
+          <div className="input-group-horizontal">
+            <div className="input-item">
+              <label>Proponente:</label>
+              <input 
+                type="text" 
+                value={proponente} 
+                onChange={(e) => setProponente(e.target.value)} 
+                placeholder="Nome do Proponente" 
+              />
+            </div>
+
+            <div className="input-item">
+              <label>Curso:</label>
+              <input 
+                type="text" 
+                value={curso} 
+                onChange={(e) => setCurso(e.target.value)} 
+                placeholder="Curso relacionado" 
+              />
+            </div>
+          </div>
         </div>
-      )}
+
+        {/* Campo Comentários do Relator - Horizontal, à direita */}
+        <div className="comentarios-relator">
+          <label>Comentários do Relator:</label>
+          <textarea className="textBox"
+            value={comentariosRelator}
+            onChange={(e) => setComentariosRelator(e.target.value)}
+            placeholder="Deixe seus comentários"
+          />
+        </div>
+
+        {/* Botão de envio */}
+        <button onClick={handleSubmit}>Enviar</button>
+      </div>
     </div>
   );
 }
