@@ -29,20 +29,23 @@ const Login = () => {
       // Tenta realizar o login
       const { username, password } = credentials;
       const response = await loginUsuario({ email: username, senha: password });
-
-      // Armazena o token no localStorage
-      localStorage.setItem('token', response.token);
-
-      // Redireciona para a página '/home'
-      navigate('/home');
-
+  
       // Exibe uma notificação de sucesso
       toast.success("Login bem-sucedido!");
+  
+      // Armazena o token no localStorage e redireciona
+      localStorage.setItem('token', response.token);
+  
+      // Adiciona um delay antes de redirecionar
+      setTimeout(() => {
+        navigate('/home');
+      }, 1000); // Aguarda 1 segundo antes de navegar
     } catch (error) {
       console.error('Erro ao fazer login:', error);
       toast.error('Email ou senha incorretos. Tente novamente!'); // Exibe uma notificação de erro
     }
   };
+  
 
   return (
     <div className="login-container">
