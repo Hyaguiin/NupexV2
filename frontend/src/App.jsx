@@ -1,11 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom'; 
+import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext'; // Importe o AuthProvider
 import Login from './components/login/login';
 import Register from './components/register/register';
 import Home from './screens/home/home'; // Página inicial
 import FormGerenciamentoUsuarios from './screens/userMangmt/gerenciamentoUsuario'; // Página de gerenciamento de usuários
 import Header from './components/header/Header';
 import Painel from './components/painel/Painel'; // Componente Painel
+import PrivateRoute from './components/private/privateRoute';
 
 // Layout principal que inclui Header e Painel
 function Layout() {
@@ -20,20 +22,27 @@ function Layout() {
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        {/* Layout será utilizado para renderizar todas as páginas com o Header e o Painel */}
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} /> {/* Página inicial */}
-          <Route path="home" element={<Home />} /> {/* Adiciona a rota "/home" */}
-          <Route path="gerenciamentoUsuario" element={<FormGerenciamentoUsuarios />} /> {/* Página de gerenciamento */}
-        </Route>
+    <AuthProvider> {/* Envolvendo o App com AuthProvider */}
+      <Router>
+        <Routes>
+          {/* Layout será utilizado para renderizar todas as páginas com o Header e o Painel */}
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} /> {/* Página inicial */}
+            <Route path="home" element={<Home />} /> {/* Adiciona a rota "/home" */}
 
-        {/* Páginas de login e registro sem o Layout */}
-        <Route path="login" element={<Login />} /> 
-        <Route path="register" element={<Register />} /> 
-      </Routes>
-    </Router>
+            {/* Rota protegida para o gerenciamento de usuários */}
+            <Route 
+              path="gerenciamentoUsuario" 
+              element={<PrivateRoute element={<FormGerenciamentoUsuarios />} />} 
+            /> 
+          </Route>
+
+          {/* Páginas de login e registro sem o Layout */}
+          <Route path="login" element={<Login />} /> 
+          <Route path="register" element={<Register />} /> 
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

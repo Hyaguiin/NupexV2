@@ -1,9 +1,11 @@
 import { createContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import * as jwt from "jwt-decode";
+import jwt_decode from 'jwt-decode'; // Use a importação padrão
 
+// Criando o contexto
 export const AuthContext = createContext();
 
+// Provedor do contexto
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -13,12 +15,11 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem("token");
       if (token) {
         try {
-          const decodedToken = jwt.jwtDecode(token);
-          const currentTime = Date.now() / 1000; // Obtém o tempo atual em segundos
+          const decodedToken = jwt_decode(token);  // A função de decodificação
+          const currentTime = Date.now() / 1000;  // Tempo atual em segundos
           if (decodedToken.exp > currentTime) {
-            setUser({ ...decodedToken, token, role: decodedToken.role }); // Aqui estamos assumindo que `role` está presente no token
+            setUser({ ...decodedToken, token, role: decodedToken.role });
           } else {
-            // Token expirou, então remove do localStorage
             localStorage.removeItem("token");
             setUser(null);
           }
@@ -30,15 +31,11 @@ export const AuthProvider = ({ children }) => {
       }
       setLoading(false);
     };
-    
 
-    // Executa na montagem para verificar o token
     loadUserFromToken();
 
-    // Adiciona o listener para detectar mudanças no localStorage
     window.addEventListener("storage", loadUserFromToken);
 
-    // Remove o listener quando o componente desmonta
     return () => {
       window.removeEventListener("storage", loadUserFromToken);
     };
@@ -46,7 +43,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = (token) => {
     try {
-      const decodedToken = jwt.jwtDecode(token);
+      const decodedToken = jwt_decode(token);
       localStorage.setItem("token", token);
       setUser({ ...decodedToken, token });
     } catch (error) {
