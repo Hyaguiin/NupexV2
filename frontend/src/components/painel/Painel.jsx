@@ -25,8 +25,8 @@ function Painel() {
     navigate('/home'); // Redireciona para a página de dashboard (home)
   };
 
-  const handleAvaliacaoProjetos = () => {
-    navigate('/avaliacaoProjeto'); // Redireciona para a página de avaliação de projetos
+  const handleAdmissaoProjetos = () => {
+    navigate('/admissaoProjeto'); // Redireciona para a página de avaliação de projetos
   };
 
   return (
@@ -72,14 +72,14 @@ function Painel() {
           </div>
         </div>
 
-        <div className="painel-content" onClick= {handleAvaliacaoProjetos}>
+        <div className="painel-content">
           <div className="user-icon">
             <i className="fas fa-star"></i>
             <span className="user-name">Avaliação de Projetos</span>
           </div>
         </div>
 
-        <div className="painel-content" onClick={() => navigate('/admissao')}>
+        <div className="painel-content" onClick={handleAdmissaoProjetos}>
           <div className="user-icon">
             <i className="fas fa-clipboard-list"></i>
             <span className="user-name">Admissão</span>

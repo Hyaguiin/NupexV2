@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './avaliacaoProjeto.scss';
+import './admissaoProjeto.scss';
 
-function AvaliacaoProjetos() {
+function AdmissaoProjetos() {
   const [projeto, setProjeto] = useState('');
   const [modalidade, setModalidade] = useState('');
   const [proponente, setProponente] = useState('');
@@ -1554,4 +1554,4 @@ function AvaliacaoProjetos() {
   );
 }
 
-export default AvaliacaoProjetos;
+export default AdmissaoProjetos;
