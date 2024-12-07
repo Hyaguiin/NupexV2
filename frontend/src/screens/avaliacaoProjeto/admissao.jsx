@@ -883,15 +883,122 @@ function AvaliacaoProjetos() {
     </div>
   </div>
 
-  <div className="comentarios-relator">
-    <label>Justificativas/Comentários</label>
-    <textarea
-      className="textBox"
-      name="justificativasComentarios"
-      // onChange={(e) => setValor(e.target.value)}
-    />
+  
+  <div className="input-item">
+    <label>A proposta detém potencial de contribuição científica (aprimoramento das formulações teóricas sobre o tema)?</label>
+    <div className="radio-group">
+      <label>
+        <input
+          type="radio"
+          name="contribuicaoCientifica"
+          value="0"
+          // onChange={() => setValor('0')}
+        />
+        0
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="contribuicaoCientifica"
+          value="1"
+          // onChange={() => setValor('1')}
+        />
+        1
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="contribuicaoCientifica"
+          value="2"
+          // onChange={() => setValor('2')}
+        />
+        2
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="contribuicaoCientifica"
+          value="3"
+          // onChange={() => setValor('3')}
+        />
+        3
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="contribuicaoCientifica"
+          value="4"
+          // onChange={() => setValor('4')}
+        />
+        4
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="contribuicaoCientifica"
+          value="5"
+          // onChange={() => setValor('5')}
+        />
+        5
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="contribuicaoCientifica"
+          value="6"
+          // onChange={() => setValor('6')}
+        />
+        6
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="contribuicaoCientifica"
+          value="7"
+          // onChange={() => setValor('7')}
+        />
+        7
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="contribuicaoCientifica"
+          value="8"
+          // onChange={() => setValor('8')}
+        />
+        8
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="contribuicaoCientifica"
+          value="9"
+          // onChange={() => setValor('9')}
+        />
+        9
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="contribuicaoCientifica"
+          value="10"
+          // onChange={() => setValor('10')}
+        />
+        10
+      </label>
+    </div>
   </div>
+   {/* Justificativa/Comentário */}
+   <div className="comentarios-relator">
+          <label>Justificativas/Comentário:</label>
+          <textarea className="textBox"
+            value={justificativa}
+            onChange={(e) => setJustificativa(e.target.value)}
+            placeholder="Deixe seus comentários"
+          />
+        </div>
 </div>
+
 
         </div>
 
@@ -1423,7 +1530,6 @@ function AvaliacaoProjetos() {
       </label>
     </div>
   </div>
-
   <div className="comentarios-relator">
     <label>Justificativas/Comentários</label>
     <textarea
@@ -1432,21 +1538,14 @@ function AvaliacaoProjetos() {
       // onChange={(e) => setValor(e.target.value)}
     />
   </div>
+
 </div>
 
         </div>
 
         
 
-        {/* Justificativa/Comentário */}
-        <div className="comentarios-relator">
-          <label>Justificativas/Comentário:</label>
-          <textarea className="textBox"
-            value={justificativa}
-            onChange={(e) => setJustificativa(e.target.value)}
-            placeholder="Deixe seus comentários"
-          />
-        </div>
+       
 
         {/* Botão de envio */}
         <button onClick={handleSubmit}>Enviar</button>
