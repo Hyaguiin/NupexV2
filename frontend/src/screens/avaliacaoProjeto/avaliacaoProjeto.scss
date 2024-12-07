@@ -4,6 +4,8 @@
   margin: auto;
   display: flex;
   justify-content: center;
+  height: 100vh; /* Garantir que ocupe toda a altura da tela */
+  overflow-y: auto; /* Adicionar o scroll vertical se o conteúdo for maior que a altura */
 }
 
 .container-formulario {
@@ -14,19 +16,15 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombras para dar um efeito de elevação */
   width: 90%; /* Aumentado para 90% da largura da tela */
   max-width: 1500px; /* Pode aumentar até 1500px, mas não mais que isso */
+  max-height: 80vh; /* Limita a altura para 80% da altura da tela */
+  overflow-y: auto; /* Adicionar o scroll se o conteúdo exceder a altura */
 }
 
-/* Título */
-h1 {
-  text-align: center;
-  margin-bottom: 30px; /* Adicionando margem inferior para dar espaçamento entre o título e o formulário */
-}
-
-/* Título do formulário */
 .tituloArea {
   display: flex;
   color: #0257b1;
   width: 100%;
+  max-width: 2800px;
   font-size: 15px;
   margin-right: 250px;
   margin-top: -30px;
@@ -34,6 +32,10 @@ h1 {
   border-color: #f0f0f0;
   border-radius: 8px;
   background-color: #f4f4f4;
+}
+
+h1 {
+  text-align: center;
 }
 
 /* Organiza os campos verticalmente */
@@ -146,4 +148,47 @@ button:hover {
   .comentarios-relator {
     margin-left: 0; /* Alinha o Comentário à esquerda em telas menores */
   }
+}
+
+/* Estilo do novo container 'Critérios Analíticos' */
+.container-criterios {
+  padding: 20px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.8); /* Cor de fundo com opacidade */
+  border: 2px solid #ccc; /* Borda do container */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombras para dar um efeito de elevação */
+  margin-top: 30px; /* Distância do conteúdo acima */
+  overflow-y: auto; /* Scroll se necessário */
+  max-height: 500px; /* Limita a altura dos critérios */
+}
+
+.container-criterios h1 {
+  color: #0257b1;
+  font-size: 18px;
+  margin-bottom: 20px; /* Margem para espaçar o título do conteúdo */
+  text-align: left; /* Alinha o título à esquerda */
+}
+
+.container-criterios .input-item {
+  display: flex;
+  flex-direction: row; /* Alinha label e campo de texto lado a lado */
+  justify-content: flex-start;
+  gap: 10px;
+  width: 48%;
+  min-width: 200px;
+}
+
+.container-criterios .input-item label {
+  font-weight: bold;
+  width: 30%; /* Ajusta a largura do label */
+}
+
+.container-criterios .input-item input {
+  padding: 10px;
+  font-size: 14px;
+  width: 70%; /* Ajusta a largura do campo de texto */
+  margin-top: 0;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
